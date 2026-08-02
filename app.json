@@ -1,0 +1,78 @@
+{
+  "expo": {
+    "name": "Interny",
+    "slug": "intern-track",
+    "version": "1.02",
+    "scheme": "interny",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "com.smantri.Interny",
+      "supportsTablet": false,
+      "buildNumber": "3",
+      "appleTeamId": "56WQ46ZCN9",
+      "infoPlist": {
+        "NSCalendarsUsageDescription": "Interny uses your calendar to add internship application deadlines so you never miss one.",
+        "NSCalendarsFullAccessUsageDescription": "Interny uses your calendar to add internship application deadlines so you never miss one.",
+        "NSRemindersUsageDescription": "Interny can create reminders for your internship application deadlines.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.interny.app",
+      "versionCode": 3,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#2563EB"
+      },
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.SCHEDULE_EXACT_ALARM",
+        "android.permission.POST_NOTIFICATIONS"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#2563EB",
+          "defaultChannel": "deadlines",
+          "sounds": []
+        }
+      ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Interny uses your calendar to add internship application deadlines so you never miss one."
+        }
+      ],
+      "expo-video",
+      "@react-native-community/datetimepicker"
+    ],
+    "notification": {
+      "icon": "./assets/notification-icon.png",
+      "color": "#2563EB",
+      "androidMode": "default"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "40ed92a2-b1f2-4cfd-b8f7-f4ca4361eeff"
+      }
+    },
+    "owner": "blah78981"
+  }
+}
