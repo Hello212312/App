@@ -1346,11 +1346,11 @@ export default function ChatScreen({ navigation }) {
                 onPress={() => send()}
                 disabled={!input.trim()}
               >
-                <Ionicons
-                  name={loading ? 'time-outline' : 'arrow-up'}
-                  size={18}
-                  color={Colors.white}
-                />
+                {loading ? (
+                  <ActivityIndicator size="small" color={Colors.white} />
+                ) : (
+                  <Ionicons name="arrow-up" size={18} color={Colors.white} />
+                )}
               </Pressable>
             </View>
           </View>
