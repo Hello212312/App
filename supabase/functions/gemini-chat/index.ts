@@ -1,5 +1,6 @@
 // Edge Function: gemini-chat
-// Proxies Gemini calls server-side. Rate-limits each device to 3 msgs/day.
+// Proxies Gemini calls server-side. Free devices get 1 msg/day, then are locked
+// out until they upgrade (or the day resets).
 // Devices listed in ADMIN_DEVICE_IDS (comma-separated env var) are unlimited,
 // and any device in premium_devices (kept in sync by revenuecat-webhook) is unlimited.
 
@@ -19,7 +20,7 @@ const ADMIN_DEVICE_IDS = new Set(
 const GEMINI_URL     = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 const RPC_URL        = `${SUPABASE_URL}/rest/v1/rpc/check_and_increment_chat_usage`;
 const PREMIUM_URL    = `${SUPABASE_URL}/rest/v1/premium_devices?device_id=eq.__DEVICE__&active=eq.true&select=device_id`;
-const DAILY_LIMIT    = 3;
+const DAILY_LIMIT    = 1;
 
 // Daily free-tier limit is enforced below (DAILY_LIMIT). Flip to true only
 // for a temporary promo/testing period.

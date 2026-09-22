@@ -1,0 +1,2 @@
+# User direction — September 5, 2026
+The user rejected the redesigned onboarding and match presentation and requested the pre-change version. Restore that original version instead of refining the rejected design. Deliver seven separate real screenshot images, not only a contact sheet or ZIP. Preserve the project's restrained creative style; the concrete new constraint is separate image delivery and the original app design.

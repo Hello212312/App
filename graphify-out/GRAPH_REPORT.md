@@ -1,74 +1,369 @@
-# Graph Report - .  (2026-07-08)
+# Graph Report - my_app  (2026-09-09)
 
 ## Corpus Check
-- 52 files · ~96,389 words
+- 381 files · ~1,980,533 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 530 nodes · 956 edges · 39 communities (25 shown, 14 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 11 edges (avg confidence: 0.7)
-- Token cost: 574,220 input · 0 output
+- 5547 nodes · 13860 edges · 342 communities (212 shown, 130 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 277 edges (avg confidence: 0.53)
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `eae0da2e`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- App Core & User Data
-- Expo Router Boilerplate & Theming
-- Internship Detail & Matching Screens
-- Expo App Configuration
-- Profile, Premium & Notifications
-- Internship Matching Engine
-- Package Dependencies
-- Shared UI Components & Playbook/Deadlines
-- Search Screen
-- Onboarding Flow
-- Premium Tour Feature
-- AI Chat Screen
-- Interview Prep Feature
-- Error Boundary Component
-- Reset Project Script
-- Resume Parsing Edge Function
-- Feature Tour Modal
-- TypeScript Config
-- Gemini Chat Edge Function
-- Stripe Webhook Edge Function
-- App Icon Assets
-- Stripe Checkout Edge Function
-- Supabase Client Setup
-- Brand Icon Concept
-- Company Data & README
-- Adaptive Icon Asset
-- Favicon Asset
-- Android Icon Background Asset
-- Android Monochrome Icon Asset
-- Web Favicon Asset
-- Splash Icon Asset
-- Notification Icon Asset
-- Root Splash Icon Asset
-- Tour Match Asset
-- Expo Readme
+- cn
+- explore.tsx
+- components.js
+- expo
+- screens/ProfileScreen.js
+- utils/matching.js
+- devDependencies
+- devDependencies
+- screens/SearchScreen.js
+- implementation-baseline/matching.js
+- generate-carousels.cjs
+- screens/ChatScreen.js
+- Architecture Overview
+- ErrorBoundary
+- reset-project.js
+- parse-resume/index.ts
+- interny-app/screens/SavedScreen.js
+- tsconfig.json
+- gemini-chat/index.ts
+- stripe-webhook/index.ts
+- app.json (Expo App Configuration)
+- create-checkout/index.ts
+- ios
+- App Icon (Interny) - Blue 'A' Boomerang/Chevron Mark
+- Existing Companies List
+- sidebar.tsx
+- context/UserContext.js
+- Adaptive Icon
+- App Favicon Icon
+- Android Icon Background (adaptive icon safe-zone diagram)
+- Android Monochrome Icon (Chevron)
+- Favicon (blue chevron/arrow logo)
+- Splash Icon (Concentric Circles Logo)
+- Notification Icon (Blue Square, White Upward Arrow)
+- Splash Icon
+- Tour Match UI Fragment
+- Expo Internal README
+- Interny TikTok content system
+- permissions
+- Interny social creative brief
+- Premium / Payments / Essay Review — setup checklist
+- revenuecat-webhook/index.ts
+- Internship Verification Workflow
+- notification
+- splash
+- extra
+- _
+- eslint.config.js
+- metro.config.js
+- Q: Where are Interny's real brand assets and app screens for social creative?
+- Photography prompts
+- utils/matching.test.mjs
+- .codex/AGENTS.md
+- expo-application
+- dependencies
+- dependencies
+- rejected-implementation/utils/matching.js
+- expo-dev-client
+- o
+- implementation-baseline/utils/matching.js
+- interny-site/lib/utils.ts
+- expo-status-bar
+- expo-store-review
+- expo-updates
+- Interny onboarding and match-score audit
+- rejected-implementation/screens/ProfileScreen.js
+- interny-app/utils/matching.js
+- @react-native-async-storage/async-storage
+- @react-native-community/datetimepicker
+- interny-site/components/ui/button.tsx
+- rejected-implementation/screens/SearchScreen.js
+- p
+- interny-app/App.js
+- a
+- rejected-implementation/screens/HomeScreen.js
+- rejected-implementation/screens/OnboardingScreen.js
+- @react-navigation/stack
+- u
+- cn
+- menubar.tsx
+- implementation-baseline/OnboardingScreen.js
+- screens/InterviewPrepScreen.js
+- computeMatchBreakdown
+- App.js
+- compilerOptions
+- match-probes.mjs
+- implementation-baseline/screens/SearchScreen.js
+- screens/OnboardingScreen.js
+- Q: Audit onboarding and match score in Interny
+- screens/DetailScreen.js
+- implementation-baseline/ProfileScreen.js
+- implementation-baseline/screens/DetailScreen.js
+- implementation-baseline/context/UserContext.js
+- rejected-implementation/screens/DetailScreen.js
+- combobox.tsx
+- implementation-baseline/screens/HomeScreen.js
+- computeMatchBreakdown
+- implement-matching.cjs
+- implementation-baseline/matching.test.mjs
+- root-updates.cjs
+- integrate-profile.cjs
+- catalog-polish.cjs
+- integrate-matching.cjs
+- refine-integration.cjs
+- ui-polish.cjs
+- rail-consistency.cjs
+- fetch-live-catalog.cjs
+- final-cleanup.cjs
+- finish-polish.cjs
+- prerequisite-check.cjs
+- root-final.cjs
+- similar-rails.cjs
+- web-scroll-fix.cjs
+- rejected-implementation/context/UserContext.js
+- components.json
+- command.tsx
+- package.json
+- @expo/vector-icons
+- po
+- restore-original.cjs
+- rejected-implementation/utils/matching.test.mjs
+- restore-original-root.cjs
+- Interny implementation and slideshow delivery — September 5, 2026
+- last-coverage.cjs
+- user-design-direction.md
+- interny-app/screens/OnboardingScreen.js
+- rules
+- react-native-web
+- context-menu.tsx
+- drawer.tsx
+- carousel.tsx
+- interny-site/components/ui/field.tsx
+- interny-app/screens/ProfileScreen.js
+- chart.tsx
+- h
+- rules
+- interny-site/app/phone-scene.tsx
+- attachment.tsx
+- ignorePatterns
+- interny-site-review/components/ui/sidebar.tsx
+- navigation-menu.tsx
+- interny-site/vite.config.ts
+- interny-site-review/lib/utils.ts
+- bubble.tsx
+- e
+- interny-site/app/layout.tsx
+- alert.tsx
+- interny-site-review/components/ui/button.tsx
+- marker.tsx
+- interny-site-review/components/ui/item.tsx
+- f
+- interny-app/screens/SearchScreen.js
+- interny-app/context/UserContext.js
+- posthog-react-native
+- react
+- interny-app/context/TourContext.js
+- interny-site-review/components/ui/menubar.tsx
+- compilerOptions
+- interny-site-review/components/ui/combobox.tsx
+- devDependencies
+- dependencies
+- screens/HomeScreen.js
+- interny-site-review/components.json
+- interny-site-review/components/ui/command.tsx
+- interny-site-review/app/page.tsx
+- c
+- interny-site-review/components/ui/drawer.tsx
+- interny-site-review/components/ui/carousel.tsx
+- interny-site/package.json
+- interny-site-review/components/ui/alert-dialog.tsx
+- interny-site-review/components/ui/chart.tsx
+- interny-site-review/package.json
+- interny-site-review/components/ui/attachment.tsx
+- ignorePatterns
+- t
+- interny-site/components/ui/empty.tsx
+- interny-site-review/components/ui/empty.tsx
+- interny-app/screens/DetailScreen.js
+- interny-site-review/components/ui/bubble.tsx
+- n
+- interny-site-review/components/ui/alert.tsx
+- Interny site parity assessment — 2026-09-08
+- cf
+- interny-site-review/app/layout.tsx
+- interny-site-review/vite.config.ts
+- interny-site/next.config.ts
+- cmdk
+- react
+- react-day-picker
+- s
+- recharts
+- tailwind-merge
+- three
+- @openai/sites-vite-plugin
+- @tailwindcss/postcss
+- interny-app/screens/ChatScreen.js
+- interny-site-review/next.config.ts
+- cmdk
+- react
+- react-day-picker
+- react-dom
+- recharts
+- tailwind-merge
+- three
+- @openai/sites-vite-plugin
+- @tailwindcss/postcss
+- r
+- fi
+- dependencies
+- expo
+- navigation-state.test.cjs
+- y
+- interny-app/screens/InterviewPrepScreen.js
+- devDependencies
+- ios
+- ErrorBoundary
+- interny-app/package.json
+- interny-app/utils/matching.test.mjs
+- web/notifications.js
+- android
+- interny-site/components/ui/tabs.tsx
+- permissions
+- prepare-interny-browser.cjs
+- extra
+- interny-app/components/ui/icon-symbol.tsx
+- interny-app/metro.config.js
+- desktop-redesign.cjs
+- notification
+- interny-app/components/parallax-scroll-view.tsx
+- interny-app/components/themed-text.tsx
+- desktop-layouts.cjs
+- web
+- interny-app/components/external-link.tsx
+- interny-app/components/themed-view.tsx
+- interny-app/components/ui/collapsible.tsx
+- refine-interny-browser.cjs
+- verify-flows.cjs
+- verify-interny.cjs
+- @cloudflare/vite-plugin
+- expo
+- ct
+- expo-calendar
+- expo-clipboard
+- expo-dev-client
+- expo-device
+- expo-file-system
+- expo-linking
+- expo-localization
+- expo-status-bar
+- expo-store-review
+- expo-updates
+- @expo/vector-icons
+- expo-video
+- react
+- react-dom
+- @react-native-async-storage/async-storage
+- @react-native-community/datetimepicker
+- react-native-gesture-handler
+- react-native-purchases
+- react-native-reanimated
+- react-native-screens
+- react-native-web
+- @react-navigation/native
+- @react-navigation/stack
+- @supabase/supabase-js
+- smoke-interny.cjs
+- expo-clipboard
+- expo-file-system
+- expo-linking
+- expo-video
+- react-native-gesture-handler
+- react-native-purchases
+- @react-navigation/native
+- dc
+- .push
+- interny-app/screens/HomeScreen.js
+- Gw
+- .clearTimeout
+- then
+- i
+- hk
+- .toString
+- .fromPurchasesError
+- .log
+- .enqueue
+- onConnMessage
+- interny-site/components/ui/alert-dialog.tsx
+- Qo
+- Fy
+- xy
+- .connect
+- Ly
+- connectWithFallback
+- trigger
+- interny-site-review/components/ui/popover.tsx
+- .getCustomerInfo
+- .isConnected
+- .doFlush
+- nw
+- interny-site-review/components/ui/tabs.tsx
+- presentExpressPurchaseButton
+- triggerChanError
+- interny-site-review/components/ui/native-select.tsx
+- runAfterInteractions
+- qg
+- Interny desktop update — 2026-09-08
+- Bk
+- ck
+- lk
+- nk
+- ok
+- pk
+- rk
+- uk
+- redesign-web.cjs
+- @shadcn/react
+- posthog-react-native
+- @cloudflare/vite-plugin
+- expo-constants
+- expo-document-picker
+- expo-font
+- expo-notifications
+- react-native
+- react-native-safe-area-context
+- @react-navigation/bottom-tabs
 
 ## God Nodes (most connected - your core abstractions)
-1. `useUser()` - 39 edges
-2. `getEffectiveDaysLeft()` - 24 edges
-3. `computeMatchScore()` - 20 edges
-4. `expo` - 17 edges
-5. `SearchScreen()` - 16 edges
-6. `INTERNSHIPS` - 15 edges
-7. `HomeScreen()` - 15 edges
-8. `computeMatchReasons()` - 14 edges
-9. `DetailScreen()` - 13 edges
-10. `subscribeToInternships()` - 12 edges
+1. `_` - 1121 edges
+2. `cn()` - 343 edges
+3. `cn()` - 343 edges
+4. `t()` - 206 edges
+5. `o()` - 190 edges
+6. `n()` - 177 edges
+7. `a()` - 175 edges
+8. `c()` - 169 edges
+9. `r()` - 161 edges
+10. `h()` - 156 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `App Icon (Blue Arrow)` --references--> `app.json (Expo App Configuration)`  [INFERRED]
   assets/icon.png → app.json
 - `app.json (Expo App Configuration)` --references--> `Android Adaptive Icon Foreground (Blue Chevron/Arrow)`  [INFERRED]
   app.json → assets/images/android-icon-foreground.png
+- `buildFeatureTourSteps()` --indirect_call--> `it()`  [INFERRED]
+  utils/featureTourSteps.js → .codex/interny-site-review/public/interny-app/_expo/static/js/web/index-3989655eb91827b5604f2d5cce69dda6.js
+- `App()` --calls--> `loadInternships()`  [EXTRACTED]
+  App.js → data.js
 - `TabLayout()` --indirect_call--> `HapticTab()`  [INFERRED]
   app/(tabs)/_layout.tsx → components/haptic-tab.tsx
-- `DeadlinesScreen()` --calls--> `useUser()`  [EXTRACTED]
-  screens/DeadlinesScreen.js → context/UserContext.js
-- `EssayReviewScreen()` --calls--> `useUser()`  [EXTRACTED]
-  screens/EssayReviewScreen.js → context/UserContext.js
 
 ## Import Cycles
 - None detected.
@@ -77,117 +372,813 @@
 - **Theming System** — constants_theme, hooks_use_color_scheme, hooks_use_theme_color [EXTRACTED 1.00]
 - **Navigation Structure** — app_layout, app_tabs_layout [EXTRACTED 1.00]
 
-## Communities (39 total, 14 thin omitted)
+## Communities (342 total, 130 thin omitted)
 
-### Community 0 - "App Core & User Data"
-Cohesion: 0.06
-Nodes (49): App(), ErrorBoundary, NOTE: no hardcoded height/paddingBottom — overriding them prevents, NOTE: loadInternships / subscribeToInternships are handled in App() below, RootNavigator(), Stack, Tab, TAB_ICONS (+41 more)
+### Community 0 - "cn"
+Cohesion: 0.05
+Nodes (66): Accordion(), AccordionContent(), AccordionItem(), AccordionTrigger(), Avatar(), AvatarBadge(), AvatarFallback(), AvatarGroup() (+58 more)
 
-### Community 1 - "Expo Router Boilerplate & Theming"
+### Community 1 - "explore.tsx"
 Cohesion: 0.08
 Nodes (30): unstable_settings, styles, styles, styles, TabLayout(), Partial React Logo (Atom Icon), React Logo Icon (PNG), React Logo (2x) Image Asset (+22 more)
 
-### Community 2 - "Internship Detail & Matching Screens"
-Cohesion: 0.09
-Nodes (36): DETAIL_TABS, DetailScreen(), _FALLBACK_STATUS_META, _FALLBACK_STATUSES, matchColors(), matchLabel(), OverviewContent(), styles (+28 more)
+### Community 2 - "components.js"
+Cohesion: 0.07
+Nodes (27): ClosedBadge(), CompanyLogo(), Divider(), MatchBreakdownModal(), mbStyles, PremiumTourOverlay(), styles, { width: SCREEN_W, height: SCREEN_H } (+19 more)
 
-### Community 3 - "Expo App Configuration"
-Cohesion: 0.05
-Nodes (41): backgroundColor, foregroundImage, adaptiveIcon, edgeToEdgeEnabled, package, permissions, versionCode, projectId (+33 more)
+### Community 3 - "expo"
+Cohesion: 0.12
+Nodes (16): expo, icon, name, newArchEnabled, orientation, owner, runtimeVersion, scheme (+8 more)
 
-### Community 4 - "Profile, Premium & Notifications"
+### Community 4 - "screens/ProfileScreen.js"
+Cohesion: 0.07
+Nodes (36): useTourTarget(), EssayReviewScreen(), styles, AGE_OPTIONS, ALL_INTERESTS, computeProfileStrength(), EditProfileModal(), extractStateAbbrev() (+28 more)
+
+### Community 5 - "utils/matching.js"
 Cohesion: 0.08
-Nodes (34): useTourTarget(), EssayReviewScreen(), PaywallScreen(), styles, ALL_INTERESTS, computeProfileStrength(), EditProfileModal(), extractStateAbbrev() (+26 more)
+Nodes (56): CITY_COORDS, ADJACENCY_GROUPS, ageFitLevel(), ALL_STATE_ABBREVS, CITY_TO_STATE, computeMatchBreakdown(), computeMatchReasons(), describeLocationEntry() (+48 more)
 
-### Community 5 - "Internship Matching Engine"
-Cohesion: 0.11
-Nodes (39): ChecklistCard(), ADJACENCY_GROUPS, ALL_STATE_ABBREVS, CITY_TO_STATE, computeMatchReasons(), computeMatchScore(), detectGenderRequirement(), detectPayType() (+31 more)
+### Community 6 - "devDependencies"
+Cohesion: 0.18
+Nodes (11): devDependencies, babel-preset-expo, eslint, eslint-config-expo, @types/react, typescript, babel-preset-expo, eslint (+3 more)
 
-### Community 6 - "Package Dependencies"
-Cohesion: 0.06
-Nodes (35): dependencies, expo, expo-calendar, expo-clipboard, expo-document-picker, expo-file-system, expo-linking, expo-notifications (+27 more)
+### Community 7 - "devDependencies"
+Cohesion: 0.07
+Nodes (29): devDependencies, @cloudflare/workers-types, oxfmt, oxlint, oxlint-tsgolint, tailwindcss, @types/node, @types/react (+21 more)
 
-### Community 7 - "Shared UI Components & Playbook/Deadlines"
-Cohesion: 0.11
-Nodes (17): CompanyLogo(), styles, BUCKET_COLORS, BUCKET_LABELS, BUCKET_ORDER, bucketFor(), DeadlinesScreen(), styles (+9 more)
+### Community 8 - "screens/SearchScreen.js"
+Cohesion: 0.09
+Nodes (29): plugins, expo-localization, expo-video, @react-native-community/datetimepicker, buildStateRegex(), CategoryCard, CheckboxRow, COMPETITIVENESS_OPTIONS (+21 more)
 
-### Community 8 - "Search Screen"
-Cohesion: 0.11
-Nodes (27): buildStateRegex(), CategoryCard, CheckboxRow, COMPETITIVENESS_OPTIONS, dpStyles, FIELD_OPTIONS, FILTER_GROUPS, getDaysLeft() (+19 more)
+### Community 9 - "implementation-baseline/matching.js"
+Cohesion: 0.07
+Nodes (58): ADJACENCY_GROUPS, ageFitLevel(), ageFromBirthday(), ALL_STATE_ABBREVS, CITY_TO_STATE, computeDaysLeft(), computeMatchBreakdown(), computeMatchReasons() (+50 more)
 
-### Community 9 - "Onboarding Flow"
-Cohesion: 0.11
-Nodes (10): GENDER_OPTIONS, GPA_OPTIONS, GRADES, INTERESTS, OnboardingScreen(), RACE_OPTIONS, READINESS_OPTIONS, SchoolStep() (+2 more)
-
-### Community 10 - "Premium Tour Feature"
-Cohesion: 0.16
-Nodes (12): PremiumTourOverlay(), styles, { width: SCREEN_W, height: SCREEN_H }, { height: SCREEN_H }, IDLE, sleep(), TourActionsContext, TourProvider() (+4 more)
-
-### Community 11 - "AI Chat Screen"
+### Community 10 - "generate-carousels.cjs"
 Cohesion: 0.21
-Nodes (11): askGemini(), buildCatalog(), buildSystemPrompt(), ChatScreen(), extractIds(), getDeviceId(), getLoadingText(), sleep() (+3 more)
+Nodes (20): brand(), C, chip(), contactSheet(), cover(), esc(), footer(), fs (+12 more)
 
-### Community 12 - "Interview Prep Feature"
-Cohesion: 0.31
-Nodes (9): buildMockDeck(), InterviewPrepScreen(), shuffle(), styles, FIELD_ORDER, FIELD_QUESTIONS, FIELD_TIPS, GENERAL_QUESTIONS (+1 more)
+### Community 11 - "screens/ChatScreen.js"
+Cohesion: 0.15
+Nodes (17): askGemini(), buildCatalog(), buildProfileSummary(), buildSystemPrompt(), buildTrackerSummary(), CHAT_MODES, ChatScreen(), extractIds() (+9 more)
 
-### Community 13 - "Error Boundary Component"
+### Community 12 - "Architecture Overview"
+Cohesion: 0.15
+Nodes (11): Architecture Overview, Commands, Development, File-based Routing, graphify, Hooks and Utilities, Key Components, Navigation Structure (+3 more)
+
+### Community 13 - "ErrorBoundary"
 Cohesion: 0.20
 Nodes (4): ErrorBoundary, Props, State, styles
 
-### Community 14 - "Reset Project Script"
+### Community 14 - "reset-project.js"
 Cohesion: 0.22
 Nodes (7): exampleDirPath, fs, oldDirs, path, readline, rl, root
 
-### Community 15 - "Resume Parsing Edge Function"
-Cohesion: 0.25
+### Community 15 - "parse-resume/index.ts"
+Cohesion: 0.22
 Nodes (3): CORS, GEMINI_API_KEYS, GEMINI_SUPPORTED_MIME_TYPES
 
-### Community 16 - "Feature Tour Modal"
-Cohesion: 0.29
-Nodes (3): SLIDES, styles, { width: SCREEN_W, height: SCREEN_H }
+### Community 16 - "interny-app/screens/SavedScreen.js"
+Cohesion: 0.07
+Nodes (34): ClosedBadge(), CompanyLogo(), Divider(), MatchBreakdownModal(), mbStyles, PremiumTourOverlay(), styles, { width: SCREEN_W, height: SCREEN_H } (+26 more)
 
-### Community 17 - "TypeScript Config"
-Cohesion: 0.29
-Nodes (6): compilerOptions, paths, strict, extends, include, @/*
+### Community 17 - "tsconfig.json"
+Cohesion: 0.22
+Nodes (8): expo/tsconfig.base, compilerOptions, paths, strict, extends, include, **/*.ts, **/*.tsx
 
-### Community 18 - "Gemini Chat Edge Function"
+### Community 18 - "gemini-chat/index.ts"
 Cohesion: 0.40
 Nodes (5): ADMIN_DEVICE_IDS, CORS, GEMINI_API_KEYS, isPremiumDevice(), json()
 
-### Community 19 - "Stripe Webhook Edge Function"
+### Community 19 - "stripe-webhook/index.ts"
 Cohesion: 0.60
 Nodes (3): revokePremium(), sbHeaders(), upsertPremium()
 
-### Community 20 - "App Icon Assets"
+### Community 20 - "app.json (Expo App Configuration)"
 Cohesion: 0.67
 Nodes (3): app.json (Expo App Configuration), App Icon (Blue Arrow), Android Adaptive Icon Foreground (Blue Chevron/Arrow)
 
+### Community 22 - "ios"
+Cohesion: 0.20
+Nodes (10): ios, ITSAppUsesNonExemptEncryption, NSCalendarsFullAccessUsageDescription, NSCalendarsUsageDescription, NSRemindersUsageDescription, appleTeamId, buildNumber, bundleIdentifier (+2 more)
+
+### Community 26 - "sidebar.tsx"
+Cohesion: 0.06
+Nodes (39): Sheet(), SheetContent(), SheetDescription(), SheetFooter(), SheetHeader(), SheetOverlay(), SheetTitle(), Sidebar() (+31 more)
+
+### Community 27 - "context/UserContext.js"
+Cohesion: 0.12
+Nodes (26): ReviewPromptModal(), ACTIVE_STATUSES, DEFAULT_USER, makeId(), ONBOARDING_VERSION, NOTE: keep the setApplicationMap call OUTSIDE the setSavedIds updater,, STATUS_META, STATUSES (+18 more)
+
+### Community 39 - "Interny TikTok content system"
+Cohesion: 0.17
+Nodes (11): Admissions-stat post, Best repeatable series, Example six-slide carousel, Five-minute internship post, Generated work, Hook bank, Imported reference posts, Interny TikTok content system (+3 more)
+
+### Community 40 - "permissions"
+Cohesion: 0.15
+Nodes (13): backgroundColor, foregroundImage, adaptiveIcon, edgeToEdgeEnabled, package, permissions, versionCode, android (+5 more)
+
+### Community 41 - "Interny social creative brief"
+Cohesion: 0.40
+Nodes (4): Controlled test, Interny social creative brief, Required visual direction, Research basis
+
+### Community 42 - "Premium / Payments / Essay Review — setup checklist"
+Cohesion: 0.33
+Nodes (5): 1. RevenueCat + in-app purchase (the $8 Premium unlock), 2. Chat rate limiting, 3. Essay review: real human pipeline, 4. More Premium upsell placements, Premium / Payments / Essay Review: setup checklist
+
+### Community 43 - "revenuecat-webhook/index.ts"
+Cohesion: 0.38
+Nodes (5): ACTIVE_EVENTS, INACTIVE_EVENTS, revokePremium(), sbHeaders(), upsertPremium()
+
+### Community 44 - "Internship Verification Workflow"
+Cohesion: 0.33
+Nodes (5): Internship Verification Workflow, `location_eligibility` entry format, Part 1: Master Prompt (source of truth, do not edit), Part 2: Structured-field addendum (REQUIRED on every pass), Part 3: Efficiency rules
+
+### Community 45 - "notification"
+Cohesion: 0.50
+Nodes (4): notification, androidMode, color, icon
+
+### Community 46 - "splash"
+Cohesion: 0.50
+Nodes (4): splash, backgroundColor, image, resizeMode
+
+### Community 47 - "extra"
+Cohesion: 0.40
+Nodes (5): projectId, extra, eas, posthogApiKey, posthogHost
+
+### Community 48 - "_"
+Cohesion: 0.01
+Nodes (152): _, addEventListener(), alpha(), applePayPeriod(), assert(), assertFieldSize(), bg(), binaryEncode() (+144 more)
+
+### Community 51 - "Q: Where are Interny's real brand assets and app screens for social creative?"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: Where are Interny's real brand assets and app screens for social creative?, Source Nodes
+
+### Community 52 - "Photography prompts"
+Cohesion: 0.50
+Nodes (3): College profile cover, Internship search cover, Photography prompts
+
+### Community 53 - "utils/matching.test.mjs"
+Cohesion: 0.22
+Nodes (5): baseUser, here, srcPath, tmpDir, tmpPath
+
+### Community 56 - "dependencies"
+Cohesion: 0.12
+Nodes (17): dependencies, expo, expo-calendar, expo-device, expo-localization, react-dom, react-native-reanimated, react-native-screens (+9 more)
+
+### Community 57 - "dependencies"
+Cohesion: 0.07
+Nodes (27): dependencies, @base-ui/react, class-variance-authority, clsx, date-fns, embla-carousel-react, input-otp, lucide-react (+19 more)
+
+### Community 58 - "rejected-implementation/utils/matching.js"
+Cohesion: 0.09
+Nodes (42): ADJACENCY_GROUPS, ageFitLevel(), ageFromBirthday(), ALL_STATE_ABBREVS, CITY_TO_STATE, computeDaysLeft(), describeLocationEntry(), detectGenderRequirement() (+34 more)
+
+### Community 60 - "o"
+Cohesion: 0.03
+Nodes (16): availableDiskSpace(), bundleDirectory(), cacheDirectory(), cs(), deviceName(), deviceType(), documentDirectory(), enabled() (+8 more)
+
+### Community 61 - "implementation-baseline/utils/matching.js"
+Cohesion: 0.07
+Nodes (49): ADJACENCY_GROUPS, ageFitLevel(), ageFromBirthday(), ALL_STATE_ABBREVS, CITY_TO_STATE, computeSimilarityScore(), describeLocationEntry(), detectGenderRequirement() (+41 more)
+
+### Community 62 - "interny-site/lib/utils.ts"
+Cohesion: 0.06
+Nodes (19): AspectRatio(), Badge(), badgeVariants, Checkbox(), HoverCardContent(), PopoverContent(), PopoverDescription(), PopoverHeader() (+11 more)
+
+### Community 66 - "Interny onboarding and match-score audit"
+Cohesion: 0.08
+Nodes (25): 10. Demographic purpose explanation does not cover analytics use — high, 1. Profile edits can leave Home and Search ranked using stale scores — high, 2. Unknown eligibility is displayed as a confident match — high, 3. “Stay local” does not establish a realistic commute — high, 4. School location is treated as home/residency — high, 5. Recommendation surfaces do not share one eligibility policy — high, 6. Missing answers receive invented fit points — medium/high, 7. “Prestige & selectivity” promises different behavior from the formula — medium (+17 more)
+
+### Community 68 - "rejected-implementation/screens/ProfileScreen.js"
+Cohesion: 0.07
+Nodes (31): ProfileExtras(), s, useTourTarget(), STATUS_META, AGE_OPTIONS, ALL_INTERESTS, computeProfileStrength(), EditProfileModal() (+23 more)
+
+### Community 69 - "interny-app/utils/matching.js"
+Cohesion: 0.08
+Nodes (56): CITY_COORDS, ADJACENCY_GROUPS, ageFitLevel(), ALL_STATE_ABBREVS, CITY_TO_STATE, computeMatchBreakdown(), computeMatchReasons(), describeLocationEntry() (+48 more)
+
+### Community 72 - "interny-site/components/ui/button.tsx"
+Cohesion: 0.07
+Nodes (23): Button(), buttonVariants, Calendar(), CalendarDayButton(), MessageScroller(), MessageScrollerButton(), MessageScrollerContent(), MessageScrollerItem() (+15 more)
+
+### Community 73 - "rejected-implementation/screens/SearchScreen.js"
+Cohesion: 0.10
+Nodes (26): buildStateRegex(), CategoryCard, CheckboxRow, COMPETITIVENESS_OPTIONS, dpStyles, FIELD_OPTIONS, FILTER_GROUPS, getDaysLeft() (+18 more)
+
+### Community 74 - "p"
+Cohesion: 0.04
+Nodes (32): p, ajax(), alert(), appendParams(), B(), be(), Ce(), cloneRequestState() (+24 more)
+
+### Community 75 - "interny-app/App.js"
+Cohesion: 0.07
+Nodes (39): App(), ErrorBoundary, navigateToInternship(), parseInternshipIdFromUrl(), NOTE: no hardcoded height/paddingBottom, because overriding them, NOTE: loadInternships / subscribeToInternships are handled in App() below, RootNavigator(), Stack (+31 more)
+
+### Community 76 - "a"
+Cohesion: 0.07
+Nodes (10): a(), ap(), checkConfig(), controlledBottomTabs(), get(), _getAccessToken(), getOwnPropertyDescriptor(), _getSessionToken() (+2 more)
+
+### Community 77 - "rejected-implementation/screens/HomeScreen.js"
+Cohesion: 0.20
+Nodes (15): BehaviorCard(), buildDailyPickReason(), getDailySeed(), getGreeting(), getInitials(), HomeScreen(), InternshipCard, styles (+7 more)
+
+### Community 78 - "rejected-implementation/screens/OnboardingScreen.js"
+Cohesion: 0.21
+Nodes (9): ONBOARDING_VERSION, OnboardingScreen(), s, logOnboardingStep(), getRecommendationTier(), initialProfile(), INTEREST_OPTIONS, mergeOnboardingDraft() (+1 more)
+
+### Community 80 - "u"
+Cohesion: 0.03
+Nodes (10): __addChild(), createInteractionHandle(), cu(), execute(), __getChildren(), __getNativeTag(), __removeChild(), start() (+2 more)
+
+### Community 81 - "cn"
+Cohesion: 0.04
+Nodes (79): Avatar(), AvatarBadge(), AvatarFallback(), AvatarGroup(), AvatarGroupCount(), AvatarImage(), Breadcrumb(), BreadcrumbEllipsis() (+71 more)
+
+### Community 82 - "menubar.tsx"
+Cohesion: 0.09
+Nodes (26): DropdownMenu(), DropdownMenuCheckboxItem(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem(), DropdownMenuLabel(), DropdownMenuPortal(), DropdownMenuRadioGroup() (+18 more)
+
+### Community 83 - "implementation-baseline/OnboardingScreen.js"
+Cohesion: 0.07
+Nodes (20): BIRTHDAY_DEFAULT, BIRTHDAY_MAX, BIRTHDAY_MIN, birthdayToISO(), FORMAT_OPTIONS, formatBirthday(), GENDER_OPTIONS, GPA_OPTIONS (+12 more)
+
+### Community 84 - "screens/InterviewPrepScreen.js"
+Cohesion: 0.26
+Nodes (10): buildMockDeck(), InterviewPrepScreen(), shuffle(), styles, FIELD_ORDER, FIELD_QUESTIONS, FIELD_TIPS, GENERAL_QUESTIONS (+2 more)
+
+### Community 85 - "computeMatchBreakdown"
+Cohesion: 0.20
+Nodes (12): { height: SCREEN_H }, IDLE, sleep(), TourActionsContext, TourProvider(), TourStateContext, buildFeatureTourSteps(), goTab() (+4 more)
+
+### Community 86 - "App.js"
+Cohesion: 0.09
+Nodes (22): App(), ErrorBoundary, navigateToInternship(), parseInternshipIdFromUrl(), NOTE: no hardcoded height/paddingBottom, because overriding them, NOTE: loadInternships / subscribeToInternships are handled in App() below, RootNavigator(), Stack (+14 more)
+
+### Community 87 - "compilerOptions"
+Cohesion: 0.06
+Nodes (31): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+23 more)
+
+### Community 88 - "match-probes.mjs"
+Cohesion: 0.29
+Nodes (5): dir, program, results, root, student
+
+### Community 89 - "implementation-baseline/screens/SearchScreen.js"
+Cohesion: 0.10
+Nodes (27): buildStateRegex(), CategoryCard, CheckboxRow, COMPETITIVENESS_OPTIONS, dpStyles, FIELD_OPTIONS, FILTER_GROUPS, getDaysLeft() (+19 more)
+
+### Community 90 - "screens/OnboardingScreen.js"
+Cohesion: 0.07
+Nodes (27): BIRTHDAY_DEFAULT, BIRTHDAY_MAX, BIRTHDAY_MIN, birthdayToISO(), FORMAT_OPTIONS, formatBirthday(), GENDER_OPTIONS, GPA_OPTIONS (+19 more)
+
+### Community 91 - "Q: Audit onboarding and match score in Interny"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: Audit onboarding and match score in Interny, Source Nodes
+
+### Community 92 - "screens/DetailScreen.js"
+Cohesion: 0.08
+Nodes (28): { height: SCREEN_H }, IDLE, sleep(), TourActionsContext, TourProvider(), TourStateContext, INTERNSHIPS, ChecklistCard() (+20 more)
+
+### Community 93 - "implementation-baseline/ProfileScreen.js"
+Cohesion: 0.08
+Nodes (22): AGE_OPTIONS, ALL_INTERESTS, computeProfileStrength(), EditProfileModal(), extractStateAbbrev(), FORMAT_PREF_OPTIONS, GENDER_OPTIONS, getInitials() (+14 more)
+
+### Community 94 - "implementation-baseline/screens/DetailScreen.js"
+Cohesion: 0.10
+Nodes (24): { height: SCREEN_H }, IDLE, sleep(), TourActionsContext, TourProvider(), TourStateContext, useTourTarget(), useUser() (+16 more)
+
+### Community 95 - "implementation-baseline/context/UserContext.js"
+Cohesion: 0.15
+Nodes (15): ACTIVE_STATUSES, APPLICATION_STATUSES, DECIDED_STATUSES, DEFAULT_USER, makeId(), ONBOARDING_VERSION, NOTE: keep the setApplicationMap call OUTSIDE the setSavedIds updater,, STATUS_META (+7 more)
+
+### Community 96 - "rejected-implementation/screens/DetailScreen.js"
+Cohesion: 0.09
+Nodes (24): MatchInsight(), MatchInsightModal(), s, ChecklistCard(), DETAIL_TABS, DetailScreen(), _FALLBACK_STATUS_META, _FALLBACK_STATUSES (+16 more)
+
+### Community 97 - "combobox.tsx"
+Cohesion: 0.09
+Nodes (23): ComboboxChip(), ComboboxChips(), ComboboxChipsInput(), ComboboxClear(), ComboboxContent(), ComboboxEmpty(), ComboboxGroup(), ComboboxInput() (+15 more)
+
+### Community 98 - "implementation-baseline/screens/HomeScreen.js"
+Cohesion: 0.22
+Nodes (15): BehaviorCard(), buildDailyPickReason(), getDailySeed(), getGreeting(), getInitials(), HomeScreen(), InternshipCard, styles (+7 more)
+
+### Community 99 - "computeMatchBreakdown"
+Cohesion: 0.32
+Nodes (11): computeMatchBreakdown(), getApplicationReadiness(), getProfileCoverage(), normaliseInterest(), getCopy(), requestNotificationPermission(), resolveReminderDays(), scheduleAllReminders() (+3 more)
+
+### Community 100 - "implement-matching.cjs"
+Cohesion: 0.15
+Nodes (12): ageEnd, ageStart, end, file, fs, locEnd, locStart, newScorer (+4 more)
+
+### Community 101 - "implementation-baseline/matching.test.mjs"
+Cohesion: 0.22
+Nodes (5): baseUser, here, srcPath, tmpDir, tmpPath
+
+### Community 102 - "root-updates.cjs"
+Cohesion: 0.29
+Nodes (6): file, fs, path, pkg, root, s
+
+### Community 103 - "integrate-profile.cjs"
+Cohesion: 0.40
+Nodes (4): fs, path, root, s
+
+### Community 104 - "catalog-polish.cjs"
+Cohesion: 0.50
+Nodes (3): b, fs, s
+
+### Community 105 - "integrate-matching.cjs"
+Cohesion: 0.40
+Nodes (3): fs, path, root
+
+### Community 106 - "refine-integration.cjs"
+Cohesion: 0.40
+Nodes (3): fs, path, root
+
+### Community 107 - "ui-polish.cjs"
+Cohesion: 0.40
+Nodes (4): end, fs, s, start
+
+### Community 108 - "rail-consistency.cjs"
+Cohesion: 0.50
+Nodes (3): fs, i, s
+
+### Community 116 - "rejected-implementation/context/UserContext.js"
+Cohesion: 0.12
+Nodes (27): ACTIVE_STATUSES, APPLICATION_STATUSES, DECIDED_STATUSES, DEFAULT_USER, makeId(), NOTE: keep the setApplicationMap call OUTSIDE the setSavedIds updater,, STATUSES, UserContext (+19 more)
+
+### Community 117 - "components.json"
+Cohesion: 0.09
+Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
+
+### Community 118 - "command.tsx"
+Cohesion: 0.12
+Nodes (16): Command(), CommandDialog(), CommandEmpty(), CommandGroup(), CommandInput(), CommandItem(), CommandList(), CommandSeparator() (+8 more)
+
+### Community 119 - "package.json"
+Cohesion: 0.22
+Nodes (8): license, main, private, scripts, android, ios, start, web
+
+### Community 121 - "po"
+Cohesion: 0.07
+Nodes (64): Ag(), ao(), ay(), Bh(), bo(), Br(), ca(), Ch() (+56 more)
+
+### Community 122 - "restore-original.cjs"
+Cohesion: 0.25
+Nodes (6): archive, base, root, fs, path, s
+
+### Community 123 - "rejected-implementation/utils/matching.test.mjs"
+Cohesion: 0.29
+Nodes (4): dir, here, item, user
+
+### Community 125 - "Interny implementation and slideshow delivery — September 5, 2026"
+Cohesion: 0.33
+Nodes (5): Implemented, Interny implementation and slideshow delivery — September 5, 2026, Practical limits, Screenshot slideshow, Validation
+
+### Community 126 - "last-coverage.cjs"
+Cohesion: 0.50
+Nodes (3): fs, i, s
+
+### Community 128 - "interny-app/screens/OnboardingScreen.js"
+Cohesion: 0.07
+Nodes (29): BIRTHDAY_DEFAULT, BIRTHDAY_MAX, BIRTHDAY_MIN, birthdayToISO(), FORMAT_OPTIONS, formatBirthday(), GENDER_OPTIONS, GPA_OPTIONS (+21 more)
+
+### Community 129 - "rules"
+Cohesion: 0.04
+Nodes (48): categories, correctness, env, browser, builtin, node, ignorePatterns, build/** (+40 more)
+
+### Community 131 - "context-menu.tsx"
+Cohesion: 0.12
+Nodes (9): ContextMenuCheckboxItem(), ContextMenuContent(), ContextMenuItem(), ContextMenuLabel(), ContextMenuRadioItem(), ContextMenuSeparator(), ContextMenuShortcut(), ContextMenuSubTrigger() (+1 more)
+
+### Community 132 - "drawer.tsx"
+Cohesion: 0.14
+Nodes (10): DrawerContent(), DrawerContext, DrawerContextProps, DrawerDescription(), DrawerFooter(), DrawerHeader(), DrawerOverlay(), DrawerSwipeHandle() (+2 more)
+
+### Community 133 - "carousel.tsx"
+Cohesion: 0.19
+Nodes (13): Carousel(), CarouselApi, CarouselContent(), CarouselContext, CarouselContextProps, CarouselItem(), CarouselNext(), CarouselOptions (+5 more)
+
+### Community 134 - "interny-site/components/ui/field.tsx"
+Cohesion: 0.07
+Nodes (29): ButtonGroup(), ButtonGroupSeparator(), ButtonGroupText(), buttonGroupVariants, Field(), FieldContent(), FieldDescription(), FieldError() (+21 more)
+
+### Community 135 - "interny-app/screens/ProfileScreen.js"
+Cohesion: 0.07
+Nodes (34): useTourTarget(), EssayReviewScreen(), AGE_OPTIONS, ALL_INTERESTS, computeProfileStrength(), EditProfileModal(), extractStateAbbrev(), FORMAT_PREF_OPTIONS (+26 more)
+
+### Community 136 - "chart.tsx"
+Cohesion: 0.21
+Nodes (11): ChartConfig, ChartContainer(), ChartContext, ChartContextProps, ChartLegendContent(), ChartTooltipContent(), getPayloadConfigFromPayload(), INITIAL_DIMENSION (+3 more)
+
+### Community 137 - "h"
+Cohesion: 0.04
+Nodes (16): batchSend(), decrement(), Fe(), h(), hasReceived(), increment(), is_deferred(), parseJSON() (+8 more)
+
+### Community 138 - "rules"
+Cohesion: 0.04
+Nodes (48): categories, correctness, env, browser, builtin, node, ignorePatterns, build/** (+40 more)
+
+### Community 139 - "interny-site/app/phone-scene.tsx"
+Cohesion: 0.18
+Nodes (6): chapters, screens, files, opening, Pose, poses
+
+### Community 140 - "attachment.tsx"
+Cohesion: 0.20
+Nodes (11): Attachment(), AttachmentAction(), AttachmentActions(), AttachmentContent(), AttachmentDescription(), AttachmentGroup(), AttachmentMedia(), attachmentMediaVariants (+3 more)
+
+### Community 141 - "ignorePatterns"
+Cohesion: 0.18
+Nodes (10): ignorePatterns, bun.lock, bun.lockb, package-lock.json, pnpm-lock.yaml, yarn.lock, printWidth, $schema (+2 more)
+
+### Community 142 - "interny-site-review/components/ui/sidebar.tsx"
+Cohesion: 0.06
+Nodes (39): Sheet(), SheetContent(), SheetDescription(), SheetFooter(), SheetHeader(), SheetOverlay(), SheetTitle(), Sidebar() (+31 more)
+
+### Community 143 - "navigation-menu.tsx"
+Cohesion: 0.22
+Nodes (9): NavigationMenu(), NavigationMenuContent(), NavigationMenuIndicator(), NavigationMenuItem(), NavigationMenuLink(), NavigationMenuList(), NavigationMenuPositioner(), NavigationMenuTrigger() (+1 more)
+
+### Community 145 - "interny-site-review/lib/utils.ts"
+Cohesion: 0.04
+Nodes (28): AspectRatio(), Badge(), badgeVariants, Checkbox(), ContextMenuCheckboxItem(), ContextMenuContent(), ContextMenuItem(), ContextMenuLabel() (+20 more)
+
+### Community 146 - "bubble.tsx"
+Cohesion: 0.38
+Nodes (6): Bubble(), BubbleContent(), BubbleGroup(), BubbleReactions(), bubbleReactionsVariants, bubbleVariants
+
+### Community 147 - "e"
+Cohesion: 0.15
+Nodes (75): ac(), bd(), bn(), bt(), cl(), e(), ec(), en() (+67 more)
+
+### Community 149 - "alert.tsx"
+Cohesion: 0.40
+Nodes (5): Alert(), AlertAction(), AlertDescription(), AlertTitle(), alertVariants
+
+### Community 150 - "interny-site-review/components/ui/button.tsx"
+Cohesion: 0.07
+Nodes (23): Button(), buttonVariants, Calendar(), CalendarDayButton(), MessageScroller(), MessageScrollerButton(), MessageScrollerContent(), MessageScrollerItem() (+15 more)
+
+### Community 151 - "marker.tsx"
+Cohesion: 0.50
+Nodes (4): Marker(), MarkerContent(), MarkerIcon(), markerVariants
+
+### Community 153 - "interny-site-review/components/ui/item.tsx"
+Cohesion: 0.13
+Nodes (17): ButtonGroup(), ButtonGroupSeparator(), ButtonGroupText(), buttonGroupVariants, Item(), ItemActions(), ItemContent(), ItemDescription() (+9 more)
+
+### Community 154 - "f"
+Cohesion: 0.03
+Nodes (18): addChangeListener(), addListener(), close(), cn(), computeViewableItems(), delete(), f(), __getAnimatedValue() (+10 more)
+
+### Community 155 - "interny-app/screens/SearchScreen.js"
+Cohesion: 0.10
+Nodes (27): buildStateRegex(), CategoryCard, CheckboxRow, COMPETITIVENESS_OPTIONS, dpStyles, FIELD_OPTIONS, FILTER_GROUPS, getDaysLeft() (+19 more)
+
+### Community 156 - "interny-app/context/UserContext.js"
+Cohesion: 0.12
+Nodes (24): ReviewPromptModal(), ACTIVE_STATUSES, DEFAULT_USER, makeId(), ONBOARDING_VERSION, NOTE: keep the setApplicationMap call OUTSIDE the setSavedIds updater,, STATUS_META, STATUSES (+16 more)
+
+### Community 159 - "interny-app/context/TourContext.js"
+Cohesion: 0.24
+Nodes (10): { height: SCREEN_H }, IDLE, sleep(), TourActionsContext, TourProvider(), TourStateContext, buildFeatureTourSteps(), goTab() (+2 more)
+
+### Community 161 - "interny-site-review/components/ui/menubar.tsx"
+Cohesion: 0.09
+Nodes (26): DropdownMenu(), DropdownMenuCheckboxItem(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem(), DropdownMenuLabel(), DropdownMenuPortal(), DropdownMenuRadioGroup() (+18 more)
+
+### Community 162 - "compilerOptions"
+Cohesion: 0.06
+Nodes (31): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+23 more)
+
+### Community 163 - "interny-site-review/components/ui/combobox.tsx"
+Cohesion: 0.09
+Nodes (23): ComboboxChip(), ComboboxChips(), ComboboxChipsInput(), ComboboxClear(), ComboboxContent(), ComboboxEmpty(), ComboboxGroup(), ComboboxInput() (+15 more)
+
+### Community 164 - "devDependencies"
+Cohesion: 0.07
+Nodes (29): devDependencies, @cloudflare/workers-types, oxfmt, oxlint, oxlint-tsgolint, tailwindcss, @types/node, @types/react (+21 more)
+
+### Community 165 - "dependencies"
+Cohesion: 0.07
+Nodes (27): dependencies, @base-ui/react, class-variance-authority, clsx, date-fns, embla-carousel-react, input-otp, lucide-react (+19 more)
+
+### Community 166 - "screens/HomeScreen.js"
+Cohesion: 0.09
+Nodes (36): DeadlineBadge(), Tag(), APPLICATION_STATUSES, DECIDED_STATUSES, _listeners, loadInternships(), _notify(), refreshInternships() (+28 more)
+
+### Community 167 - "interny-site-review/components.json"
+Cohesion: 0.09
+Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
+
+### Community 168 - "interny-site-review/components/ui/command.tsx"
+Cohesion: 0.12
+Nodes (16): Command(), CommandDialog(), CommandEmpty(), CommandGroup(), CommandInput(), CommandItem(), CommandList(), CommandSeparator() (+8 more)
+
+### Community 169 - "interny-site-review/app/page.tsx"
+Cohesion: 0.14
+Nodes (12): benefits, chapters, faqs, screens, files, opening, Pose, poses (+4 more)
+
+### Community 170 - "c"
+Cohesion: 0.04
+Nodes (32): apply(), applyWithGuard(), blur(), blurTextInput(), c(), createCheckoutOnCloseHandler(), createCheckoutOnErrorHandler(), d() (+24 more)
+
+### Community 171 - "interny-site-review/components/ui/drawer.tsx"
+Cohesion: 0.14
+Nodes (10): DrawerContent(), DrawerContext, DrawerContextProps, DrawerDescription(), DrawerFooter(), DrawerHeader(), DrawerOverlay(), DrawerSwipeHandle() (+2 more)
+
+### Community 172 - "interny-site-review/components/ui/carousel.tsx"
+Cohesion: 0.19
+Nodes (13): Carousel(), CarouselApi, CarouselContent(), CarouselContext, CarouselContextProps, CarouselItem(), CarouselNext(), CarouselOptions (+5 more)
+
+### Community 173 - "interny-site/package.json"
+Cohesion: 0.15
+Nodes (12): engines, node, name, private, scripts, build, dev, format (+4 more)
+
+### Community 174 - "interny-site-review/components/ui/alert-dialog.tsx"
+Cohesion: 0.15
+Nodes (9): AlertDialogAction(), AlertDialogCancel(), AlertDialogContent(), AlertDialogDescription(), AlertDialogFooter(), AlertDialogHeader(), AlertDialogMedia(), AlertDialogOverlay() (+1 more)
+
+### Community 175 - "interny-site-review/components/ui/chart.tsx"
+Cohesion: 0.21
+Nodes (11): ChartConfig, ChartContainer(), ChartContext, ChartContextProps, ChartLegendContent(), ChartTooltipContent(), getPayloadConfigFromPayload(), INITIAL_DIMENSION (+3 more)
+
+### Community 176 - "interny-site-review/package.json"
+Cohesion: 0.15
+Nodes (12): engines, node, name, private, scripts, build, dev, format (+4 more)
+
+### Community 177 - "interny-site-review/components/ui/attachment.tsx"
+Cohesion: 0.20
+Nodes (11): Attachment(), AttachmentAction(), AttachmentActions(), AttachmentContent(), AttachmentDescription(), AttachmentGroup(), AttachmentMedia(), attachmentMediaVariants (+3 more)
+
+### Community 178 - "ignorePatterns"
+Cohesion: 0.18
+Nodes (10): ignorePatterns, bun.lock, bun.lockb, package-lock.json, pnpm-lock.yaml, yarn.lock, printWidth, $schema (+2 more)
+
+### Community 179 - "t"
+Cohesion: 0.04
+Nodes (27): binaryDecode(), cancel(), cancelRefEvent(), cancelTimeout(), configureNextLayoutAnimation(), decodeBroadcast(), decodePush(), decodeReply() (+19 more)
+
+### Community 180 - "interny-site/components/ui/empty.tsx"
+Cohesion: 0.29
+Nodes (7): Empty(), EmptyContent(), EmptyDescription(), EmptyHeader(), EmptyMedia(), emptyMediaVariants, EmptyTitle()
+
+### Community 181 - "interny-site-review/components/ui/empty.tsx"
+Cohesion: 0.29
+Nodes (7): Empty(), EmptyContent(), EmptyDescription(), EmptyHeader(), EmptyMedia(), emptyMediaVariants, EmptyTitle()
+
+### Community 182 - "interny-app/screens/DetailScreen.js"
+Cohesion: 0.13
+Nodes (16): ChecklistCard(), DETAIL_TABS, DetailScreen(), _FALLBACK_STATUS_META, _FALLBACK_STATUSES, matchColors(), matchLabel(), OverviewContent() (+8 more)
+
+### Community 183 - "interny-site-review/components/ui/bubble.tsx"
+Cohesion: 0.38
+Nodes (6): Bubble(), BubbleContent(), BubbleGroup(), BubbleReactions(), bubbleReactionsVariants, bubbleVariants
+
+### Community 184 - "n"
+Cohesion: 0.05
+Nodes (11): currentlyFocusedField(), dn(), it(), measureInWindow(), measureLayout(), n(), oncommit(), order() (+3 more)
+
+### Community 185 - "interny-site-review/components/ui/alert.tsx"
+Cohesion: 0.40
+Nodes (5): Alert(), AlertAction(), AlertDescription(), AlertTitle(), alertVariants
+
+### Community 186 - "Interny site parity assessment — 2026-09-08"
+Cohesion: 0.29
+Nodes (6): Confirmed blocker before implementing the listing tab, Continuation checkpoint — browser port, not yet published, Independently authorized change, Interny site parity assessment — 2026-09-08, Pre-edit flow checklist, Verification and handoff
+
+### Community 187 - "cf"
+Cohesion: 0.05
+Nodes (51): af(), an(), At(), bf(), cf(), countryRequiresFullAddressForTaxes(), create(), createAddressElement() (+43 more)
+
+### Community 195 - "s"
+Cohesion: 0.05
+Nodes (8): clearInteractionHandle(), closeAndRetry(), ontimeout(), poll(), s(), syncDiff(), syncState(), toNullProtoObj()
+
+### Community 201 - "interny-app/screens/ChatScreen.js"
+Cohesion: 0.15
+Nodes (17): askGemini(), buildCatalog(), buildProfileSummary(), buildSystemPrompt(), buildTrackerSummary(), CHAT_MODES, ChatScreen(), extractIds() (+9 more)
+
+### Community 212 - "r"
+Cohesion: 0.04
+Nodes (33): "./coercers"(), "./cookie"(), "./dom-exception-coercer"(), "./error-coercer"(), "./error-event-coercer"(), "./error-properties-builder"(), "./error-tracking"(), "./event-coercer"() (+25 more)
+
+### Community 213 - "fi"
+Cohesion: 0.08
+Nodes (53): ad(), Al(), Ba(), bi(), bl(), bu(), ci(), di() (+45 more)
+
+### Community 216 - "dependencies"
+Cohesion: 0.12
+Nodes (17): dependencies, expo-application, expo-constants, expo-document-picker, expo-font, expo-notifications, react-native, react-native-safe-area-context (+9 more)
+
+### Community 217 - "expo"
+Cohesion: 0.12
+Nodes (15): baseUrl, expo, experiments, name, newArchEnabled, orientation, owner, runtimeVersion (+7 more)
+
+### Community 218 - "navigation-state.test.cjs"
+Cohesion: 0.14
+Nodes (9): assert, fs, main, onboarding, path, sandbox, source, {test} (+1 more)
+
+### Community 219 - "y"
+Cohesion: 0.06
+Nodes (15): a, PhoneScene(), PhoneScene(), ak, dk, from(), m(), measure() (+7 more)
+
+### Community 220 - "interny-app/screens/InterviewPrepScreen.js"
+Cohesion: 0.26
+Nodes (10): buildMockDeck(), InterviewPrepScreen(), shuffle(), styles, FIELD_ORDER, FIELD_QUESTIONS, FIELD_TIPS, GENERAL_QUESTIONS (+2 more)
+
+### Community 221 - "devDependencies"
+Cohesion: 0.18
+Nodes (11): devDependencies, babel-preset-expo, eslint, eslint-config-expo, @types/react, typescript, babel-preset-expo, eslint (+3 more)
+
+### Community 222 - "ios"
+Cohesion: 0.20
+Nodes (10): ios, ITSAppUsesNonExemptEncryption, NSCalendarsFullAccessUsageDescription, NSCalendarsUsageDescription, NSRemindersUsageDescription, appleTeamId, buildNumber, bundleIdentifier (+2 more)
+
+### Community 223 - "ErrorBoundary"
+Cohesion: 0.20
+Nodes (4): ErrorBoundary, Props, State, styles
+
+### Community 224 - "interny-app/package.json"
+Cohesion: 0.22
+Nodes (8): license, main, private, scripts, android, ios, start, web
+
+### Community 225 - "interny-app/utils/matching.test.mjs"
+Cohesion: 0.22
+Nodes (5): baseUser, here, srcPath, tmpDir, tmpPath
+
+### Community 226 - "web/notifications.js"
+Cohesion: 0.28
+Nodes (6): AndroidImportance, getPermissionsAsync(), read(), requestPermissionsAsync(), SchedulableTriggerInputTypes, scheduleNotificationAsync()
+
+### Community 227 - "android"
+Cohesion: 0.29
+Nodes (7): backgroundColor, foregroundImage, adaptiveIcon, edgeToEdgeEnabled, package, versionCode, android
+
+### Community 228 - "interny-site/components/ui/tabs.tsx"
+Cohesion: 0.40
+Nodes (5): Tabs(), TabsContent(), TabsList(), tabsListVariants, TabsTrigger()
+
+### Community 229 - "permissions"
+Cohesion: 0.33
+Nodes (6): permissions, android.permission.POST_NOTIFICATIONS, android.permission.READ_CALENDAR, android.permission.RECEIVE_BOOT_COMPLETED, android.permission.SCHEDULE_EXACT_ALARM, android.permission.WRITE_CALENDAR
+
+### Community 230 - "prepare-interny-browser.cjs"
+Cohesion: 0.33
+Nodes (3): fs, path, root
+
+### Community 231 - "extra"
+Cohesion: 0.40
+Nodes (5): projectId, extra, eas, posthogApiKey, posthogHost
+
+### Community 232 - "interny-app/components/ui/icon-symbol.tsx"
+Cohesion: 0.40
+Nodes (3): IconMapping, IconSymbolName, MAPPING
+
+### Community 233 - "interny-app/metro.config.js"
+Cohesion: 0.40
+Nodes (4): config, fs, { getDefaultConfig }, path
+
+### Community 235 - "notification"
+Cohesion: 0.50
+Nodes (4): notification, androidMode, color, icon
+
+### Community 236 - "interny-app/components/parallax-scroll-view.tsx"
+Cohesion: 0.50
+Nodes (3): ParallaxScrollView, ParallaxScrollViewRef, Props
+
+### Community 239 - "web"
+Cohesion: 0.67
+Nodes (3): web, bundler, output
+
+### Community 252 - "ct"
+Cohesion: 0.07
+Nodes (43): aa(), Ae(), Ar(), cd(), ct(), De(), dt(), ep() (+35 more)
+
+### Community 286 - "dc"
+Cohesion: 0.10
+Nodes (44): ai(), as(), Au(), cb(), cc(), dc(), dd(), ds() (+36 more)
+
+### Community 287 - ".push"
+Cohesion: 0.08
+Nodes (31): activate(), bc(), contains(), cr(), deactivate(), enqueue(), er(), flush() (+23 more)
+
+### Community 288 - "interny-app/screens/HomeScreen.js"
+Cohesion: 0.09
+Nodes (33): CatalogStatus(), DeadlineBadge(), APPLICATION_STATUSES, DECIDED_STATUSES, refreshInternships(), subscribeToInternships(), ClosingSoonScreen(), BehaviorCard() (+25 more)
+
+### Community 289 - "Gw"
+Cohesion: 0.10
+Nodes (6): Dw(), Gw, Hw(), jw(), Yw(), zw()
+
+### Community 290 - ".clearTimeout"
+Cohesion: 0.11
+Nodes (3): __debouncedOnEnd(), K(), stop()
+
+### Community 291 - "then"
+Cohesion: 0.13
+Nodes (12): catch(), fetchRequest(), finally(), g(), getOpenApiSpec(), getPromise(), getSize(), getWalletButtonRender() (+4 more)
+
+### Community 293 - "i"
+Cohesion: 0.09
+Nodes (10): da(), fetchThenEvalAsync(), getStateForAction(), has(), i(), isDark(), isLight(), nc() (+2 more)
+
+### Community 294 - "hk"
+Cohesion: 0.14
+Nodes (3): hk, Kk(), Ny()
+
+### Community 295 - ".toString"
+Cohesion: 0.14
+Nodes (18): applyTransformOptsToQuery(), createSignedUploadUrl(), createSignedUrl(), download(), encodeMetadata(), exists(), fullBundleUrl(), _getFinalPath() (+10 more)
+
+### Community 296 - ".fromPurchasesError"
+Cohesion: 0.15
+Nodes (5): Ab(), gb(), jb(), mb(), pb()
+
+### Community 299 - "onConnMessage"
+Cohesion: 0.25
+Nodes (10): clearHeartbeats(), isMember(), leaveOpenTopic(), onConnClose(), onConnError(), onConnMessage(), onConnOpen(), resetHeartbeat() (+2 more)
+
+### Community 300 - "interny-site/components/ui/alert-dialog.tsx"
+Cohesion: 0.15
+Nodes (9): AlertDialogAction(), AlertDialogCancel(), AlertDialogContent(), AlertDialogDescription(), AlertDialogFooter(), AlertDialogHeader(), AlertDialogMedia(), AlertDialogOverlay() (+1 more)
+
+### Community 302 - "Fy"
+Cohesion: 0.24
+Nodes (10): configure(), configureInternal(), Fy(), getSharedInstance(), _isConfiguredWithSimulatedStore(), My(), qy(), resolveProductChange() (+2 more)
+
+### Community 303 - "xy"
+Cohesion: 0.24
+Nodes (10): aw(), by(), Ey(), ky(), _postSimulatedStoreReceipt(), Py(), Sy(), wy() (+2 more)
+
+### Community 305 - "Ly"
+Cohesion: 0.20
+Nodes (3): Ly(), mk, Uy()
+
+### Community 308 - "connectWithFallback"
+Cohesion: 0.25
+Nodes (5): connectWithFallback(), ping(), replaceTransport(), storeSession(), transportName()
+
+### Community 309 - "trigger"
+Cohesion: 0.29
+Nodes (6): filterBindings(), joinRef(), leave(), matchReceive(), startTimeout(), trigger()
+
+### Community 310 - "interny-site-review/components/ui/popover.tsx"
+Cohesion: 0.29
+Nodes (4): PopoverContent(), PopoverDescription(), PopoverHeader(), PopoverTitle()
+
+### Community 311 - ".getCustomerInfo"
+Cohesion: 0.38
+Nodes (6): changeUser(), identifyUser(), isEntitledTo(), replaceUserId(), setAttributes(), vk()
+
+### Community 313 - ".doFlush"
+Cohesion: 0.29
+Nodes (3): isSandbox(), Jy(), Oy()
+
+### Community 315 - "interny-site-review/components/ui/tabs.tsx"
+Cohesion: 0.40
+Nodes (5): Tabs(), TabsContent(), TabsList(), tabsListVariants, TabsTrigger()
+
+### Community 316 - "presentExpressPurchaseButton"
+Cohesion: 0.40
+Nodes (6): createCheckoutOnFinishedHandler(), getCustomerInfo(), _getCustomerInfoForUserId(), presentExpressPurchaseButton(), Ug(), Wg()
+
+### Community 317 - "triggerChanError"
+Cohesion: 0.33
+Nodes (4): isErrored(), join(), rejoin(), triggerChanError()
+
+### Community 318 - "interny-site-review/components/ui/native-select.tsx"
+Cohesion: 0.40
+Nodes (4): NativeSelect(), NativeSelectOptGroup(), NativeSelectOption(), NativeSelectProps
+
+### Community 319 - "runAfterInteractions"
+Cohesion: 0.50
+Nodes (4): cancelTasks(), enqueueTasks(), runAfterInteractions(), schedule()
+
 ## Ambiguous Edges - Review These
-- `_layout.tsx` → `Partial React Logo (Atom Icon)`  [AMBIGUOUS]
+- `app/_layout.tsx` → `Partial React Logo (Atom Icon)`  [AMBIGUOUS]
   assets/images/partial-react-logo.png · relation: conceptually_related_to
-- `_layout.tsx` → `React Logo (2x) Image Asset`  [AMBIGUOUS]
+- `app/_layout.tsx` → `React Logo (2x) Image Asset`  [AMBIGUOUS]
   assets/images/react-logo@2x.png · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **194 isolated node(s):** `styles`, `styles`, `unstable_settings`, `styles`, `styles` (+189 more)
+- **1161 isolated node(s):** `root`, `dir`, `student`, `program`, `results` (+1156 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **130 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What is the exact relationship between `_layout.tsx` and `Partial React Logo (Atom Icon)`?**
+- **What is the exact relationship between `app/_layout.tsx` and `Partial React Logo (Atom Icon)`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **What is the exact relationship between `_layout.tsx` and `React Logo (2x) Image Asset`?**
+- **What is the exact relationship between `app/_layout.tsx` and `React Logo (2x) Image Asset`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `useUser()` connect `App Core & User Data` to `Internship Detail & Matching Screens`, `Profile, Premium & Notifications`, `Internship Matching Engine`, `Shared UI Components & Playbook/Deadlines`, `Search Screen`, `Onboarding Flow`, `Premium Tour Feature`, `AI Chat Screen`, `Interview Prep Feature`?**
-  _High betweenness centrality (0.123) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `Package Dependencies` to `App Core & User Data`?**
-  _High betweenness centrality (0.084) - this node is a cross-community bridge._
-- **Why does `react` connect `App Core & User Data` to `Profile, Premium & Notifications`, `Package Dependencies`?**
-  _High betweenness centrality (0.082) - this node is a cross-community bridge._
-- **What connects `styles`, `styles`, `unstable_settings` to the rest of the system?**
-  _197 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `App Core & User Data` be split into smaller, more focused modules?**
-  _Cohesion score 0.05563093622795115 - nodes in this community are weakly interconnected._
+- **Why does `_` connect `_` to `h`, `e`, `f`, `dc`, `.push`, `Gw`, `.clearTimeout`, `then`, `i`, `hk`, `.toString`, `.fromPurchasesError`, `.log`, `c`, `onConnMessage`, `.enqueue`, `Qo`, `Fy`, `xy`, `.connect`, `Ly`, `.flush`, `t`, `connectWithFallback`, `trigger`, `.getCustomerInfo`, `n`, `.isConnected`, `.doFlush`, `cf`, `o`, `presentExpressPurchaseButton`, `triggerChanError`, `runAfterInteractions`, `qg`, `nw`, `Bk`, `ck`, `s`, `lk`, `nk`, `ok`, `pk`, `rk`, `p`, `uk`, `a`, `u`, `r`, `fi`, `y`, `po`, `ct`?**
+  _High betweenness centrality (0.259) - this node is a cross-community bridge._
+- **Why does `it()` connect `n` to `screens/DetailScreen.js`, `_`, `e`, `r`, `fi`, `computeMatchBreakdown`, `ct`, `implementation-baseline/screens/DetailScreen.js`, `interny-app/context/TourContext.js`?**
+  _High betweenness centrality (0.173) - this node is a cross-community bridge._
+- **Why does `cn()` connect `cn` to `interny-site-review/components/ui/sidebar.tsx`, `interny-site-review/lib/utils.ts`, `interny-site-review/components/ui/button.tsx`, `interny-site-review/components/ui/item.tsx`, `interny-site-review/components/ui/menubar.tsx`, `interny-site-review/components/ui/combobox.tsx`, `interny-site-review/components/ui/command.tsx`, `interny-site-review/app/page.tsx`, `interny-site-review/components/ui/drawer.tsx`, `interny-site-review/components/ui/carousel.tsx`, `interny-site-review/components/ui/alert-dialog.tsx`, `interny-site-review/components/ui/chart.tsx`, `interny-site-review/components/ui/attachment.tsx`, `interny-site-review/components/ui/empty.tsx`, `interny-site-review/components/ui/popover.tsx`, `interny-site-review/components/ui/bubble.tsx`, `interny-site-review/components/ui/alert.tsx`, `interny-site-review/components/ui/tabs.tsx`, `interny-site-review/components/ui/native-select.tsx`?**
+  _High betweenness centrality (0.130) - this node is a cross-community bridge._
+- **What connects `root`, `dir`, `student` to the rest of the system?**
+  _1161 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `cn` be split into smaller, more focused modules?**
+  _Cohesion score 0.045253164556962024 - nodes in this community are weakly interconnected._

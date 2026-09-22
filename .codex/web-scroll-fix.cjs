@@ -1,0 +1,1 @@
+const fs=require('fs');const p='App.js';let s=fs.readFileSync(p,'utf8');s=s.replace("screenOptions={{ headerShown: false }}","screenOptions={{ headerShown: false, cardStyle: Platform.OS === 'web' ? {flex: 1, height: '100%', maxHeight: '100%', overflow: 'hidden'} : undefined }}");fs.writeFileSync(p,s);

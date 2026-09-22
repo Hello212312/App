@@ -48,7 +48,7 @@ const DeadlineRow = ({ app, onPress }) => {
     dl <= 3 ? Colors.error : dl <= 7 ? Colors.warning : Colors.textPrimary;
 
   // checklist is stored as an object map { [key]: boolean } by DetailScreen,
-  // but older entries may be arrays — handle both shapes (calling .filter on
+  // but older entries may be arrays, so handle both shapes (calling .filter on
   // an object throws and crashed this screen).
   let checklistDone = 0;
   let checklistTotal = 0;

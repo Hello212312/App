@@ -8,13 +8,32 @@
 // (supabase secrets set REVENUECAT_WEBHOOK_SECRET=...).
 //
 // app_user_id in the event payload is the id passed to Purchases.configure()
-// client-side (utils/revenuecat.js) — we pass our existing per-device UUID,
+// client-side (utils/revenuecat.js). We pass our existing per-device UUID,
 // so this maps 1:1 onto the device_id column premium_devices already uses.
 
 const WEBHOOK_SECRET  = Deno.env.get('REVENUECAT_WEBHOOK_SECRET') ?? '';
 const SUPABASE_URL    = Deno.env.get('SUPABASE_URL') ?? '';
 const SERVICE_KEY     = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 const ENTITLEMENT_ID  = 'premium';
+
+const POSTHOG_API_KEY = Deno.env.get('POSTHOG_API_KEY') ?? '';
+const POSTHOG_HOST    = Deno.env.get('POSTHOG_HOST') ?? 'https://us.i.posthog.com';
+
+// Fire-and-forget: mirrors the RevenueCat event into PostHog, keyed by the
+// same deviceId used to identify() the person client-side, so subscription
+// lifecycle events join up with the rest of that person's activity.
+async function capturePosthog(event: string, distinctId: string, properties: Record<string, unknown> = {}) {
+  if (!POSTHOG_API_KEY) return;
+  try {
+    await fetch(`${POSTHOG_HOST}/i/v0/e/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ api_key: POSTHOG_API_KEY, event, distinct_id: distinctId, properties }),
+    });
+  } catch (e) {
+    console.warn('[posthog] capture error:', e);
+  }
+}
 
 const ACTIVE_EVENTS   = new Set(['INITIAL_PURCHASE', 'RENEWAL', 'UNCANCELLATION', 'NON_RENEWING_PURCHASE', 'PRODUCT_CHANGE']);
 const INACTIVE_EVENTS = new Set(['CANCELLATION', 'EXPIRATION', 'BILLING_ISSUE']);
@@ -42,8 +61,10 @@ Deno.serve(async (req) => {
 
   if (ACTIVE_EVENTS.has(event.type)) {
     await upsertPremium(deviceId);
+    await capturePosthog('subscription_activated', deviceId, { rc_event_type: event.type });
   } else if (INACTIVE_EVENTS.has(event.type)) {
     await revokePremium(deviceId);
+    await capturePosthog('subscription_deactivated', deviceId, { rc_event_type: event.type });
   }
 
   return new Response('ok', { status: 200 });

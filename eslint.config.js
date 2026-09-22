@@ -21,7 +21,7 @@ module.exports = defineConfig([
   },
   {
     rules: {
-      // Apostrophes/quotes in JSX copy render fine in React Native — escaping
+      // Apostrophes/quotes in JSX copy render fine in React Native, so escaping
       // them everywhere is churn with no user-facing benefit.
       'react/no-unescaped-entities': 'off',
       // These flag standard RN idioms (useRef(new Animated.Value()).current,

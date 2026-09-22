@@ -1,0 +1,11 @@
+Use case: ads-marketing
+Asset type: organic TikTok photo carousel cover, portrait 4:5, 1080x1350 composition
+Primary request: redesign Interny's current academic notebook aesthetic into a sharper, higher-retention TikTok carousel cover for high school students. Preserve only the recognizable editorial school-notebook mood, but make the new design original, bolder, cleaner, and more native to TikTok.
+Scene/backdrop: cream graph-paper notebook on a dark desk with subtle candid student-life details at the edges; add one small cutout photo of a diverse high school student reacting with excitement while holding a phone
+Style/medium: polished mixed-media editorial collage, tactile paper texture, bold contemporary social typography, slight imperfect sticker/tape details
+Composition/framing: mobile-first; very large high-contrast headline centered in the upper two-thirds; simple visual hierarchy readable at thumbnail size; small Interny wordmark at top; small swipe cue near bottom; keep important content away from extreme edges
+Lighting/mood: energetic, urgent, aspirational, credible
+Color palette: warm cream, near-black, Interny red accent, small electric blue accent
+Text (verbatim): "INTERNY" and "3 HIGH SCHOOL INTERNSHIPS YOU SHOULD APPLY TO THIS WEEK" and "SAVE THIS ->"
+Constraints: spell every word exactly; no college logos; no claims about acceptance or deadlines; no tiny body paragraphs; no more than the exact three text elements; accessible contrast; no watermark
+Avoid: generic corporate ad, ornate serif overload, low contrast brown-on-cream, excessive clutter, fake app UI, misspelled text

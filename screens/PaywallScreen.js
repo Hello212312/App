@@ -5,7 +5,7 @@
 // Real purchase flow: fetches the current offering's package from
 // RevenueCat on mount, then purchases it through StoreKit/Play Billing when
 // tapped. activatePremium() is only called after the store confirms the
-// purchase (or restore) actually went through — see utils/revenuecat.js for
+// purchase (or restore) actually went through. See utils/revenuecat.js for
 // the one-time dashboard setup this depends on.
 
 import { Ionicons } from '@expo/vector-icons';
@@ -24,6 +24,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useUser } from '../context/UserContext';
+import { posthog } from '../utils/posthog';
 import { Colors, Radii, Shadows, Spacing, Typography } from '../theme';
 import {
   ESSAY_REVIEWS_PER_MONTH,
@@ -41,6 +42,10 @@ export default function PaywallScreen({ navigation }) {
   const [restoring, setRestoring] = useState(false);
   const [pkg, setPkg] = useState(null);
   const [pkgLoading, setPkgLoading] = useState(true);
+
+  useEffect(() => {
+    posthog.capture('paywall_shown');
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -71,13 +76,18 @@ export default function PaywallScreen({ navigation }) {
     setWorking(true);
     const result = await purchasePremiumPackage(pkg);
     setWorking(false);
-    if (result.cancelled) return;
+    if (result.cancelled) {
+      posthog.capture('paywall_purchase_cancelled');
+      return;
+    }
     if (!result.ok) {
+      posthog.capture('paywall_purchase_failed', { error: result.error || null });
       Alert.alert('Purchase failed', result.error || 'Something went wrong completing your purchase. You have not been charged.');
       return;
     }
+    posthog.capture('paywall_purchase_completed');
     activatePremium({ email: email.trim() });
-    // No success alert — TourContext sees premium flip true and launches the
+    // No success alert: TourContext sees premium flip true and launches the
     // spotlight tour over the app right after this screen pops.
     navigation?.goBack();
   };
@@ -95,7 +105,7 @@ export default function PaywallScreen({ navigation }) {
   };
 
   if (user?.premium) {
-    // Already premium — show a simple confirmation instead of the sell screen
+    // Already premium: show a simple confirmation instead of the sell screen
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.navBar}>
@@ -202,7 +212,7 @@ export default function PaywallScreen({ navigation }) {
               <ActivityIndicator color={Colors.white} />
             ) : (
               <Text style={styles.buyBtnText}>
-                {pkgLoading ? 'Loading...' : `Get Premium — ${priceLabel} one time`}
+                {pkgLoading ? 'Loading...' : `Get Premium for ${priceLabel}, one time`}
               </Text>
             )}
           </TouchableOpacity>

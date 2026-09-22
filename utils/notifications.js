@@ -9,7 +9,7 @@
 //
 // Discovery: independent of the saved schedule, any internship the user
 // HASN'T saved yet also gets a single "closing soon" nudge if it's both a
-// strong match (>=50%) and closing within 7 days — a proactive recommendation
+// strong match (>=50%) and closing within 7 days, as a proactive recommendation
 // rather than a reminder about something already tracked.
 
 import * as Notifications from 'expo-notifications';
@@ -107,7 +107,7 @@ async function scheduleSavedReminders(savedIds, internships, user, startCount) {
       // Fire when daysLeft reaches thresholdDays, i.e. (daysLeft - thresholdDays) days from now.
       const daysUntilFire = daysLeft - thresholdDays;
 
-      // If this threshold has already arrived (daysUntilFire === 0), skip it —
+      // If this threshold has already arrived (daysUntilFire === 0), skip it:
       // the near-immediate fallback below handles that case instead.
       if (daysUntilFire <= 0) continue;
 
@@ -122,9 +122,13 @@ async function scheduleSavedReminders(savedIds, internships, user, startCount) {
         },
         // Explicit trigger type (SDK 52+ recommended form). The bare
         // `{ seconds }` shape is the legacy auto-inferred form.
+        // channelId on Android routes this to the HIGH-importance 'deadlines'
+        // channel (see App.js) instead of a default/low-importance one that
+        // Doze/battery optimization can suppress once the app isn't foregrounded.
         trigger: {
           type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
           seconds: secondsUntilFire,
+          channelId: 'deadlines',
         },
       });
       scheduledCount += 1;
@@ -134,7 +138,7 @@ async function scheduleSavedReminders(savedIds, internships, user, startCount) {
     // Every enabled threshold already fell inside the deadline window (e.g. the
     // user saved something closing tomorrow, so the "1 day left" reminder's
     // fire time is now/in the past). Previously this meant the item silently
-    // got zero reminders ever — send one near-immediate nudge instead so
+    // got zero reminders ever, so send one near-immediate nudge instead so
     // saving something that's already urgent still notifies the user.
     if (!firedAny && scheduledCount < maxForPass) {
       const copy = getCopy(daysLeft, matchPct);
@@ -148,6 +152,7 @@ async function scheduleSavedReminders(savedIds, internships, user, startCount) {
         trigger: {
           type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
           seconds: 5,
+          channelId: 'deadlines',
         },
       });
       scheduledCount += 1;
@@ -190,6 +195,7 @@ async function scheduleDiscoveryAlerts(savedIds, internships, user, startCount) 
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
         seconds: daysUntilFire * 86400,
+        channelId: 'deadlines',
       },
     });
     scheduledCount += 1;
@@ -231,6 +237,7 @@ async function scheduleNewMatchAlerts(newIds, internships, user, startCount) {
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
         seconds: 5,
+        channelId: 'deadlines',
       },
     });
     scheduledCount += 1;
@@ -241,19 +248,19 @@ async function scheduleNewMatchAlerts(newIds, internships, user, startCount) {
 /**
  * Cancels all existing reminders and reschedules, based on which notification
  * types the user has enabled:
- *  1. notifyDeadlines   — saved-internship deadline reminders, at each
+ *  1. notifyDeadlines: saved-internship deadline reminders, at each
  *     enabled threshold (default true).
- *  2. notifyHighMatch   — nudges for strong-match (>=50%) internships the
+ *  2. notifyHighMatch: nudges for strong-match (>=50%) internships the
  *     user hasn't saved yet, closing within 7 days (default true).
- *  3. notifyNewMatches  — alerts for internships just added to the catalog
+ *  3. notifyNewMatches: alerts for internships just added to the catalog
  *     that are in the user's field and a strong match (default true).
  * All three are gated by the master `notificationsOn` toggle, checked by
  * the caller before this function is invoked.
  *
- * @param {string[]} savedIds    — Array of saved internship IDs from UserContext.
- * @param {object[]} internships — Full INTERNSHIPS array from data.js.
- * @param {object}   user        — The user profile object (for match scoring, notification-type toggles, and premium/reminderDays).
- * @param {string[]} newIds      — Internship IDs newly added since the last check, for the "new match" alert type.
+ * @param {string[]} savedIds    Array of saved internship IDs from UserContext.
+ * @param {object[]} internships Full INTERNSHIPS array from data.js.
+ * @param {object}   user        The user profile object (for match scoring, notification-type toggles, and premium/reminderDays).
+ * @param {string[]} newIds      Internship IDs newly added since the last check, for the "new match" alert type.
  */
 export async function scheduleAllReminders(savedIds, internships, user = {}, newIds = []) {
   try {
@@ -276,7 +283,7 @@ export async function scheduleAllReminders(savedIds, internships, user = {}, new
       scheduledCount = await scheduleNewMatchAlerts(newIds, internships, user, scheduledCount);
     }
   } catch (err) {
-    // Silently swallow — notifications are non-critical
+    // Silently swallow: notifications are non-critical
     console.warn('[notifications] scheduleAllReminders error:', err);
   }
 }

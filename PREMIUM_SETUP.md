@@ -1,8 +1,8 @@
-# Premium / Payments / Essay Review — setup checklist
+# Premium / Payments / Essay Review: setup checklist
 
 This is everything that had to be built in code (done) and everything that
 only you can do because it requires accounts, dashboards, or store approval
-(not done — do these before shipping).
+(not done; do these before shipping).
 
 ## 1. RevenueCat + in-app purchase (the $8 Premium unlock)
 
@@ -28,7 +28,7 @@ server-side).
 3. In RevenueCat, create an **Entitlement** named exactly `premium` and
    attach both store products to it.
 4. Create an **Offering** with a **Package** offering that product (default
-   offering, first package — the code just takes `availablePackages[0]`).
+   offering, first package: the code just takes `availablePackages[0]`).
 5. Copy the iOS and Android **public API keys** (Project settings > API
    keys) and set them as env vars the app can read at build time:
    `EXPO_PUBLIC_REVENUECAT_IOS_KEY` and `EXPO_PUBLIC_REVENUECAT_ANDROID_KEY`
@@ -41,7 +41,7 @@ server-side).
    Then in RevenueCat: Project settings > Integrations > Webhooks > add the
    deployed function's URL, Authorization header value
    `Bearer <that same random string>`.
-7. **Build a dev client to test** — RevenueCat is a native SDK, Expo Go
+7. **Build a dev client to test**: RevenueCat is a native SDK, and Expo Go
    cannot run it:
    ```
    eas build --profile development --platform ios
@@ -56,14 +56,16 @@ and can be deleted once you've confirmed RevenueCat works end to end.
 
 ## 2. Chat rate limiting
 
-Already re-enabled in code: `supabase/functions/gemini-chat/index.ts` now
-enforces 3 free messages/day again (`UNLIMITED_CHATS_TEMP = false`). Just
-redeploy: `supabase functions deploy gemini-chat`. No dashboard setup needed
-— it reuses the same `premium_devices` table RevenueCat's webhook writes to.
+Already enabled in code: `supabase/functions/gemini-chat/index.ts` now
+enforces 1 free message/day (`DAILY_LIMIT = 1`, `UNLIMITED_CHATS_TEMP = false`).
+Free devices get one message, then get locked out until Premium or the next
+day. Just redeploy: `supabase functions deploy gemini-chat`. No dashboard
+setup needed, since it reuses the same `premium_devices` table RevenueCat's
+webhook writes to.
 
-## 3. Essay review — real human pipeline
+## 3. Essay review: real human pipeline
 
-Essay review was always meant to be human-reviewed (not AI) — the missing
+Essay review was always meant to be human-reviewed (not AI). The missing
 piece was that submissions went into a table nobody was notified about. Now
 every submission emails you, with **Reply-To set to the student's email**,
 so you just hit reply to send feedback.
@@ -90,6 +92,6 @@ After that, every essay submission lands in your inbox within seconds.
 
 Added a reusable `PremiumUpsellBanner` (in `components.js`) and placed it on:
 Home (feed), Search (above results), Tracker (above the pipeline), and
-Detail (below the tab content) — all gated on `!user.premium`, in addition
+Detail (below the tab content), all gated on `!user.premium`, in addition
 to the existing ones in Chat, Materials, EssayReview, InterviewPrep, and
 Profile.

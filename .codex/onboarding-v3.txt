@@ -1,0 +1,117 @@
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ONBOARDING_VERSION, useUser } from '../context/UserContext';
+import { INTERNSHIPS, refreshInternships, subscribeToInternships } from '../data';
+import { Colors } from '../theme';
+import { ageFromBirthday, computeMatchBreakdown, getRecommendationTier, isValidState } from '../utils/matching';
+import { initialProfile, INTEREST_OPTIONS, mergeOnboardingDraft, ONBOARDING_DRAFT_KEY } from '../utils/onboarding';
+import { MatchInsight } from '../components/MatchInsight';
+import { logOnboardingStep } from '../utils/analytics';
+
+function Choice({label,detail,selected,onPress}) {return <TouchableOpacity onPress={onPress} accessibilityRole="radio" accessibilityState={{selected}} style={[s.choice,selected && s.selected]}><View style={{flex:1}}><Text style={[s.choiceText,selected && {color:Colors.accent}]}>{label}</Text>{detail && <Text style={s.hint}>{detail}</Text>}</View><Text style={s.tick}>{selected?'✓':'○'}</Text></TouchableOpacity>;}
+function Input({label,...props}) {return <View style={{gap:8}}><Text style={s.label}>{label}</Text><TextInput placeholderTextColor={Colors.textTertiary} style={s.input} {...props}/></View>;}
+
+export default function OnboardingScreen({navigation,route}) {
+  const {user,loaded,setUser}=useUser();
+  const editing=route?.params?.edit === true;
+  const [profile,setProfile]=useState(()=>initialProfile(user));
+  const [step,setStep]=useState(0);
+  const [ready,setReady]=useState(false);
+  const [saving,setSaving]=useState(false);
+  const [error,setError]=useState('');
+  const [catalog,setCatalog]=useState(INTERNSHIPS);
+  const scroll=useRef(null);
+  const draftWrite=useRef(Promise.resolve());
+  const finalizing=useRef(false);
+  const update=(patch)=>setProfile(prev=>({...prev,...patch}));
+  useEffect(()=>subscribeToInternships(setCatalog),[]);
+  useEffect(()=>{
+    if(!loaded)return;
+    let active=true;
+    (async()=>{
+      let draft=null;
+      if(!editing) {try{draft=JSON.parse(await AsyncStorage.getItem(ONBOARDING_DRAFT_KEY));}catch{}}
+      if(active){setProfile(mergeOnboardingDraft(user,draft));setStep(Math.min(3,Math.max(0,draft?.step || 0)));setReady(true);}
+    })();
+    return ()=>{active=false;};
+    // Snapshot existing answers on entry; don't reset the form on ordinary profile updates.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[loaded,editing]);
+  useEffect(()=>{
+    if(!ready || editing || finalizing.current)return;
+    // Serialize writes so finishing cannot race with an older draft write.
+    draftWrite.current=draftWrite.current.catch(()=>{}).then(()=>AsyncStorage.setItem(ONBOARDING_DRAFT_KEY,JSON.stringify({profile,step})));
+  },[profile,step,ready,editing]);
+  useEffect(()=>{if(ready){Keyboard.dismiss();scroll.current?.scrollTo({y:0,animated:false});logOnboardingStep('view',step+1);}},[step,ready]);
+  const preview=useMemo(()=>catalog.map(item=>({item,b:computeMatchBreakdown(item,profile),tier:getRecommendationTier(item,profile)})).filter(x=>x.tier<2).sort((a,b)=>a.tier-b.tier || (b.b.total ?? -1)-(a.b.total ?? -1)).slice(0,3),[catalog,profile]);
+  const birthdayValid=!profile.birthday || ageFromBirthday(profile.birthday)!==null;
+  const homeValid=profile.remoteOnly || (profile.city.trim().length>1 && isValidState(profile.state) && profile.locationConfirmed);
+  const canContinue=step===0 ? !!profile.grade && birthdayValid : step===1 ? profile.interests.length>0 || profile.exploring : step===2 ? homeValid : true;
+  async function finish() {
+    if(saving)return;
+    setSaving(true);finalizing.current=true;setError('');
+    try {
+      await draftWrite.current.catch(()=>{});
+      await AsyncStorage.removeItem(ONBOARDING_DRAFT_KEY);
+      setUser({...profile,age:ageFromBirthday(profile.birthday) ?? profile.age,onboardingDone:true,onboardingVersion:ONBOARDING_VERSION,featureTourSeen:true});
+      logOnboardingStep('complete',step+1);
+      if(editing)navigation.navigate('Main',{screen:'Home'});
+    } catch {setError('Could not save setup. Please try again.');setSaving(false);finalizing.current=false;}
+  }
+  function next(skip=false) {
+    if(!skip&&!canContinue)return;
+    if(step===2&&!skip)update({logisticsAnswered:true});
+    logOnboardingStep(skip?'skip_question':'continue',step+1);
+    setStep(n=>Math.min(3,n+1));
+  }
+  function setHome(patch) {
+    setProfile(prev=>{const p={...prev,...patch};return {...p,state:p.state.toUpperCase(),location:p.city.trim()&&p.state.trim()?`${p.city.trim()}, ${p.state.toUpperCase().trim()}`:'',locationSource:'home',locationConfirmed:true};});
+  }
+  if(!ready)return <SafeAreaView style={s.safe}><ActivityIndicator style={{marginTop:64}} color={Colors.accent}/></SafeAreaView>;
+  const titles=['A few basics. Better options.','What interests you?','What works in real life?','Your starting shortlist.'];
+  const descriptions=['Your grade helps check requirements. Add a birthday if you want age checks too.','Choose a few fields you’d actually like to explore. You can change these anytime.','Set your location and limits so a good-looking program is also a practical option.','Explore these listings, check the requirements, and save the ones worth a closer look.'];
+  return <SafeAreaView style={s.safe}>
+    <View style={s.top}><TouchableOpacity style={s.smallButton} onPress={()=>step>0?setStep(step-1):editing?navigation.goBack():undefined} disabled={step===0&&!editing} accessibilityRole="button" accessibilityLabel="Previous step"><Text style={s.link}>{step>0||editing?'Back':'Interny'}</Text></TouchableOpacity><Text style={s.progress}>{step+1} of 4</Text><TouchableOpacity style={s.smallButton} onPress={finish} disabled={saving} accessibilityRole="button"><Text style={s.link}>{editing?'Save & close':'Browse now'}</Text></TouchableOpacity></View>
+    <View style={s.progressTrack}><View style={[s.progressFill,{width:`${(step+1)*25}%`}]}/></View>
+    <KeyboardAvoidingView style={{flex:1}} behavior={Platform.OS==='ios'?'padding':undefined}>
+    <ScrollView ref={scroll} keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}>
+      <Text accessibilityRole="header" style={s.title}>{titles[step]}</Text><Text style={s.subtitle}>{descriptions[step]}</Text>
+      {step===0 && <View style={s.group}>
+        {[9,10,11,12].map(g=><Choice key={g} label={`Grade ${g}`} selected={profile.grade===`${g}th Grade`} onPress={()=>update({grade:`${g}th Grade`})}/>)}
+        <Input label="Birthday · optional" placeholder="YYYY-MM-DD" value={profile.birthday} onChangeText={birthday=>update({birthday})} keyboardType="numbers-and-punctuation" maxLength={10} accessibilityLabel="Birthday, optional, year month day"/>
+        {!birthdayValid && <Text accessibilityRole="alert" style={s.error}>Use a valid date in YYYY-MM-DD format, not a future date.</Text>}
+        <Text style={s.hint}>Age is checked against the program’s cutoff date when listed. Otherwise, we ask you to confirm it. Your birthday stays in your local profile.</Text>
+      </View>}
+      {step===1 && <View style={s.group}>
+        <View style={s.pills}>{INTEREST_OPTIONS.map(field=><TouchableOpacity key={field} accessibilityRole="checkbox" accessibilityState={{checked:profile.interests.includes(field)}} onPress={()=>update({interests:profile.interests.includes(field)?profile.interests.filter(x=>x!==field):[...profile.interests,field],exploring:false})} style={[s.pill,profile.interests.includes(field)&&s.selected]}><Text style={s.choiceText}>{field}</Text></TouchableOpacity>)}</View>
+        <Choice label="I’m still exploring" detail="Browse broadly and add interests later." selected={profile.exploring} onPress={()=>update({exploring:!profile.exploring,interests:[],primaryInterest:''})}/>
+        {profile.interests.length>1 && <><Text style={s.label}>Main interest · optional</Text><View style={s.pills}>{profile.interests.map(field=><TouchableOpacity key={field} accessibilityRole="radio" accessibilityState={{selected:profile.primaryInterest===field}} style={[s.pill,profile.primaryInterest===field&&s.selected]} onPress={()=>update({primaryInterest:profile.primaryInterest===field?'':field})}><Text style={s.choiceText}>{field}</Text></TouchableOpacity>)}</View></>}
+      </View>}
+      {step===2 && <View style={s.group}>
+        <Text style={s.label}>Work format</Text><View style={s.pills}>{[['Either',''],['Remote','remote'],['In person','inperson']].map(([label,value])=><TouchableOpacity key={label} accessibilityRole="radio" accessibilityState={{selected:profile.formatPreference===value}} style={[s.pill,profile.formatPreference===value&&s.selected]} onPress={()=>update({formatPreference:value,remoteOnly:value==='remote'?profile.remoteOnly:false})}><Text style={s.choiceText}>{label}</Text></TouchableOpacity>)}</View>
+        {profile.formatPreference==='remote' && <Choice label="Fully remote is a requirement" detail="Exclude in-person and hybrid programs from recommendations." selected={profile.remoteOnly} onPress={()=>update({remoteOnly:!profile.remoteOnly})}/>}
+        {!profile.remoteOnly && <>
+          <Input label="Where will you be based?" placeholder="City, e.g. San Diego" value={profile.city || ''} onChangeText={city=>setHome({city})} autoCapitalize="words"/>
+          <Input label="State" placeholder="Two letters, e.g. CA" value={profile.state || ''} onChangeText={state=>setHome({state})} autoCapitalize="characters" maxLength={2}/>
+          {profile.state && !isValidState(profile.state) && <Text style={s.error}>Enter a valid US state abbreviation.</Text>}
+          {!profile.locationConfirmed && <Choice label="This is my home/base location" detail="Your school can be somewhere else." selected={false} onPress={()=>setHome({})}/>}
+          <Text style={s.hint}>Use your home or summer base, not your school’s address. You can add a school separately in your profile.</Text>
+          <Text style={s.label}>How far can you go?</Text>{[['Stay local','local'],['Within my state','state'],['I can relocate','anywhere']].map(([label,value])=><Choice key={value} label={label} selected={profile.travelWillingness===value} onPress={()=>update({travelWillingness:value,openToHousing:value==='local'?false:null})}/>)}
+          {profile.travelWillingness==='local' && <><Text style={s.label}>Maximum one-way distance</Text><View style={s.pills}>{[10,25,50].map(m=><TouchableOpacity key={m} accessibilityRole="radio" accessibilityState={{selected:profile.maxCommuteMiles===m}} style={[s.pill,profile.maxCommuteMiles===m&&s.selected]} onPress={()=>update({maxCommuteMiles:m})}><Text style={s.choiceText}>{m} miles</Text></TouchableOpacity>)}</View><Text style={s.hint}>Distances are approximate. Check the actual journey before applying.</Text></>}
+          {profile.travelWillingness==='anywhere' && <Choice label="I need the program to provide housing" selected={profile.needsHousing} onPress={()=>update({needsHousing:!profile.needsHousing,openToHousing:true})}/>}
+        </>}
+        <Text style={s.label}>Compensation</Text>{[['Any compensation',''],['Prefer paid work','prefer_paid'],['Paid work is required','required']].map(([label,value])=><Choice key={label} label={label} selected={(profile.paidRequired?'required':profile.payPreference)===value} onPress={()=>update({payPreference:value==='required'?'prefer_paid':value,paidRequired:value==='required'})}/>)}
+      </View>}
+      {step===3 && <View style={s.group}>
+        {preview.length ? preview.map(({item,b})=><View key={item.id} style={s.program}><Text style={s.company}>{item.company}</Text><Text style={s.programTitle}>{item.role}</Text><Text style={s.hint}>{item.location || 'Location to confirm'}</Text><MatchInsight breakdown={b} compact/></View>) : <View style={s.program}><Text style={s.programTitle}>{catalog.length?'No listings meet these limits yet.':'We’re loading your opportunities.'}</Text><Text style={s.subtitle}>{catalog.length?'Keep your limits and browse the catalog, or go back to adjust your answers.':'If the connection is unavailable, your answers are still saved.'}</Text><TouchableOpacity onPress={()=>refreshInternships()} style={s.smallButton}><Text style={s.link}>Refresh listings</Text></TouchableOpacity></View>}
+        <Text style={s.hint}>A fit percentage compares your preferences. Eligibility, travel limits, and application materials are checked separately. Optional profile details can be added later.</Text>
+      </View>}
+      {!!error && <Text style={s.error}>{error}</Text>}
+    </ScrollView>
+    <View style={s.footer}><TouchableOpacity disabled={saving || (step<3&&!canContinue)} onPress={()=>step===3?finish():next()} accessibilityRole="button" style={[s.primary,(saving || (step<3&&!canContinue))&&{opacity:.45}]}><Text style={s.primaryText}>{saving?'Saving…':step===3?'Start exploring':step===2?'See my matches':'Continue'}</Text></TouchableOpacity>{step<3&&<TouchableOpacity onPress={()=>next(true)} style={s.smallButton} accessibilityRole="button"><Text style={s.link}>Skip this question</Text></TouchableOpacity>}</View>
+    </KeyboardAvoidingView>
+  </SafeAreaView>;
+}
+const s=StyleSheet.create({safe:{flex:1,backgroundColor:Colors.background},top:{paddingHorizontal:20,flexDirection:'row',alignItems:'center',justifyContent:'space-between'},smallButton:{minHeight:44,justifyContent:'center'},link:{fontSize:14,fontWeight:'600',color:Colors.accent},progress:{fontSize:13,color:Colors.textSecondary},progressTrack:{height:3,backgroundColor:Colors.border},progressFill:{height:3,backgroundColor:Colors.accent},content:{padding:24,paddingBottom:32,maxWidth:600,width:'100%',alignSelf:'center'},title:{fontSize:30,lineHeight:36,fontWeight:'700',color:Colors.textPrimary,letterSpacing:-.8,marginBottom:12},subtitle:{fontSize:16,lineHeight:24,color:Colors.textSecondary,marginBottom:20},group:{gap:12},choice:{minHeight:52,padding:16,borderWidth:1,borderColor:Colors.border,borderRadius:12,backgroundColor:Colors.surface,flexDirection:'row',gap:12,alignItems:'center'},selected:{borderColor:Colors.accent,backgroundColor:Colors.accentLight},choiceText:{fontSize:15,fontWeight:'500',color:Colors.textPrimary},hint:{fontSize:13,lineHeight:20,color:Colors.textSecondary,marginTop:4},tick:{fontSize:20,color:Colors.accent},input:{minHeight:52,borderWidth:1,borderColor:Colors.border,borderRadius:10,padding:14,fontSize:16,color:Colors.textPrimary,backgroundColor:Colors.surface},label:{fontSize:15,fontWeight:'600',color:Colors.textPrimary,marginTop:12},pills:{flexDirection:'row',flexWrap:'wrap',gap:8},pill:{minHeight:44,paddingHorizontal:16,paddingVertical:12,borderWidth:1,borderColor:Colors.border,borderRadius:10,backgroundColor:Colors.surface},footer:{padding:16,paddingBottom:8,borderTopWidth:1,borderTopColor:Colors.border,backgroundColor:Colors.surface,alignItems:'stretch',gap:4},primary:{minHeight:52,borderRadius:12,backgroundColor:Colors.accent,justifyContent:'center',alignItems:'center'},primaryText:{fontSize:16,fontWeight:'600',color:'#FFFFFF'},error:{fontSize:14,lineHeight:20,color:'#B91C1C'},program:{padding:16,borderWidth:1,borderColor:Colors.border,borderRadius:16,backgroundColor:Colors.surface,gap:10},company:{fontSize:13,fontWeight:'600',color:Colors.accent},programTitle:{fontSize:20,lineHeight:26,fontWeight:'600',color:Colors.textPrimary}});

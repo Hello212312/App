@@ -22,6 +22,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useUser } from '../context/UserContext';
+import { posthog } from '../utils/posthog';
 import { Colors, Radii, Shadows, Spacing, Typography } from '../theme';
 import {
   ESSAY_MAX_CHARS,
@@ -92,6 +93,7 @@ export default function EssayReviewScreen({ navigation }) {
         console.warn('[EssayReview]', error);
         return;
       }
+      posthog.capture('essay_review_submitted', { program: program.trim() || null, chars: essay.length });
       addEssaySubmission({
         monthKey: getMonthKey(),
         title: title.trim() || 'Untitled essay',

@@ -1,4 +1,4 @@
-// components.tsx — Reusable UI primitives
+// components.tsx: Reusable UI primitives
 // Copy this file into your components/ folder
 
 import { Ionicons } from '@expo/vector-icons';
@@ -201,7 +201,7 @@ export const Button = ({
 };
 
 // ─── MATCH BREAKDOWN MODAL ──────────────────────────────────────────────────
-// Explains why an internship got the match score it did — tap the score
+// Explains why an internship got the match score it did. Tap the score
 // badge to open, tap the X or anywhere outside the card to close.
 
 export const MatchBreakdownModal = ({ visible, onClose, breakdown, title }) => {

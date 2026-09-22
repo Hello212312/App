@@ -18,7 +18,7 @@ export default function ReviewPromptModal() {
   const close = () => {
     dismissReviewPrompt();
     // Reset for the (unlikely) case this component stays mounted across
-    // future modal opens — it won't re-open once reviewRequested is true.
+    // future modal opens: it won't re-open once reviewRequested is true.
     setTimeout(() => setStep('ask'), 300);
   };
 

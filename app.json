@@ -2,7 +2,7 @@
   "expo": {
     "name": "Interny",
     "slug": "intern-track",
-    "version": "1.02",
+    "version": "1.3.1",
     "scheme": "interny",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,7 +16,7 @@
     "ios": {
       "bundleIdentifier": "com.smantri.Interny",
       "supportsTablet": false,
-      "buildNumber": "3",
+      "buildNumber": "4",
       "appleTeamId": "56WQ46ZCN9",
       "infoPlist": {
         "NSCalendarsUsageDescription": "Interny uses your calendar to add internship application deadlines so you never miss one.",
@@ -27,7 +27,7 @@
     },
     "android": {
       "package": "com.interny.app",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#2563EB"
@@ -61,7 +61,8 @@
         }
       ],
       "expo-video",
-      "@react-native-community/datetimepicker"
+      "@react-native-community/datetimepicker",
+      "expo-localization"
     ],
     "notification": {
       "icon": "./assets/notification-icon.png",
@@ -71,8 +72,16 @@
     "extra": {
       "eas": {
         "projectId": "40ed92a2-b1f2-4cfd-b8f7-f4ca4361eeff"
-      }
+      },
+      "posthogApiKey": "phc_z2iEef3AYNGPVDhLxTftQmWW7bcmtsdponGdNXS8zmFU",
+      "posthogHost": "https://us.i.posthog.com"
     },
-    "owner": "blah78981"
+    "owner": "blah78981",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/40ed92a2-b1f2-4cfd-b8f7-f4ca4361eeff"
+    }
   }
 }

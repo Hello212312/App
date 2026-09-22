@@ -1,0 +1,40 @@
+
+Using (experimental) base path: /interny-app
+Starting Metro Bundler
+| (node:8940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+Web .\index.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 73.3% (684/799)
+Web Bundled 1531ms index.js (901 modules)
+
+› Assets (21):
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\AntDesign.3f78af31cca60105799838a1a7a59fbd.ttf (130 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\Entypo.31b5ffea3daddc69dd01a1f3d6cf63c5.ttf (66.2 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\EvilIcons.140c53a7643ea949007aa9a282153849.ttf (13.5 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\Feather.ca4b48e04dc1ce10bfbddb262c8b835f.ttf (55.6 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\FontAwesome.b06871f281fee6b241d60582ae9369b9.ttf (166 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\FontAwesome5_Brands.3b89dd103490708d19a95adcae52210e.ttf (134 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\FontAwesome5_Regular.1f77739ca9ff2188b539c36f30ffa2be.ttf (33.7 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\FontAwesome5_Solid.605ed7926cf39a2ad5ec2d1f9d391d3d.ttf (203 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\FontAwesome6_Brands.56c8d80832e37783f12c05db7c8849e2.ttf (209 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\FontAwesome6_Regular.370dd5af19f8364907b6e2c41f45dbbf.ttf (68 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\FontAwesome6_Solid.adec7d6f310bc577f05e8fe06a5daccf.ttf (424 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\Fontisto.b49ae8ab2dbccb02c4d11caaacf09eab.ttf (314 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\Foundation.e20945d7c929279ef7a6f1db184a4470.ttf (57 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\Ionicons.b4eb097d35f44ed943676fd56f6bdc51.ttf (390 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\MaterialCommunityIcons.6e435534bd35da5fef04168860a9b8fa.ttf (1.31 MB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\MaterialIcons.4e85bc9ebe07e0340c9c4fc2f6c38908.ttf (357 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\Octicons.871378c6eab492a3e689a9385dc45a12.ttf (69.4 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\SimpleLineIcons.d2285965fe34b05465047401b8595dd0.ttf (54.1 kB)
+..\..\..\node_modules\@expo\vector-icons\build\vendor\react-native-vector-icons\Fonts\Zocial.1681f34aaca71b8dfb70756bca331eb2.ttf (25.8 kB)
+..\..\..\node_modules\@react-navigation\elements\lib\module\assets\back-icon-mask.5223c8d9b0d08b82a5670fb5f71faf78.png (913 B)
+..\..\..\node_modules\@react-navigation\elements\lib\module\assets\back-icon.35ba0eaec5a4f5ed12ca16fabeae451d.png (207 B)
+
+› web bundles (2):
+_expo/static/css/desktop-11847e9f7efcce4d3f7d67d3bd370c1e.css (7.65 kB)
+_expo/static/js/web/index-a58c2fd63fdd2be26d9f2fab7160cad8.js (4.3 MB)
+
+› Files (2):
+index.html (1.4 kB)
+metadata.json (49 B)
+
+Exported: ../public/interny-app

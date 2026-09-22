@@ -2,14 +2,14 @@
 // Student profile: reads from UserContext, fully editable.
 //
 // FIXES applied:
-// #4 — Interest list in EditProfileModal now matches the exact canonical
+// #4: Interest list in EditProfileModal now matches the exact canonical
 // field names used in data.js and matching.js, so interests saved here
 // produce correct match scores. Added all fields from Onboarding
 // (Aerospace, Finance, Journalism, Science, Computer Science) and
 // removed non-matching labels (STEM, Writing).
-// #1 — When saving a location, we also auto-extract and save the state
+// #1: When saving a location, we also auto-extract and save the state
 // abbreviation into user.state so both fields stay in sync.
-// #18 — Pipeline/applied badge now reads from statusMap (which uses the
+// #18: Pipeline/applied badge now reads from statusMap (which uses the
 // tracker's capitalized status keys) rather than the old appliedIds.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -37,6 +37,7 @@ import {
   FREE_REMINDER_DAYS,
   essayUsageThisMonth,
 } from '../utils/premium';
+import { ageFromBirthday } from '../utils/matching';
 
 // CONSTANTS 
 
@@ -67,7 +68,7 @@ const US_STATES = [
  'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC',
 ];
 
-const APP_VERSION = '1.0.1';
+const APP_VERSION = '1.3.1';
 
 const GPA_OPTIONS = [
  { label: '3.8 – 4.0', value: 'high', desc: 'Strong academics' },
@@ -78,7 +79,7 @@ const GPA_OPTIONS = [
 ];
 
 // Some internships restrict eligibility to a specific gender or race/ethnicity.
-// Entirely optional — only used to flag programs a student doesn't qualify for.
+// Entirely optional: only used to flag programs a student doesn't qualify for.
 const GENDER_OPTIONS = [
  { label: 'Female', value: 'female' },
  { label: 'Male', value: 'male' },
@@ -95,6 +96,38 @@ const RACE_OPTIONS = [
  { label: 'White', value: 'white' },
  { label: 'Prefer not to say', value: 'prefer_not_to_say' },
 ];
+
+// Age is separate from grade: programs can allow all grades but require 16+.
+const AGE_OPTIONS = [13, 14, 15, 16, 17, 18, 19];
+
+const TRAVEL_OPTIONS = [
+ { label: 'Stay local', value: 'local' },
+ { label: 'Within my state', value: 'state' },
+ { label: 'Anywhere', value: 'anywhere' },
+];
+
+const HOUSING_PREF_OPTIONS = [
+ { label: 'Open to dorms/housing', value: true },
+ { label: 'Live at home', value: false },
+];
+
+const FORMAT_PREF_OPTIONS = [
+ { label: 'Prefer remote', value: 'remote' },
+ { label: 'Prefer in-person', value: 'inperson' },
+ { label: 'No preference', value: '' },
+];
+
+// Keys must match priorityMult() in utils/matching.js
+const PRIORITY_FACTORS = [
+ { key: 'interests', label: 'Field & interests' },
+ { key: 'location', label: 'Location & format' },
+ { key: 'compensation', label: 'Getting paid' },
+ { key: 'competitiveness', label: 'Prestige & selectivity' },
+];
+
+// 1–5 scale (3 = neutral default), matching the onboarding priorities UI.
+const PRIORITY_LEVELS = [1, 2, 3, 4, 5];
+const PRIORITY_DEFAULT = 3;
 
 const READINESS_OPTIONS = [
  { label: 'Resume', key: 'hasResume' },
@@ -166,7 +199,7 @@ const SettingsRow = ({
  hasChevron = true, badge, toggle = false, toggleValue = false, onToggle,
  tourId = null,
 }) => {
- // Premium tour anchor — rows pass tourId so the spotlight can find them
+ // Premium tour anchor: rows pass tourId so the spotlight can find them
  const tourRef = useTourTarget(tourId);
  return (
  <View ref={tourRef} collapsable={false}>
@@ -324,6 +357,13 @@ const EditProfileModal = ({ visible, user, onSave, onClose }) => {
  const [readiness, setReadiness] = useState(user.readiness || []);
  const [gender, setGender] = useState(user.gender || '');
  const [race, setRace] = useState(user.race || []);
+ const [age, setAge] = useState(user.age || null);
+ const [travelWillingness, setTravelWillingness] = useState(user.travelWillingness || '');
+ const [openToHousing, setOpenToHousing] = useState(
+ typeof user.openToHousing === 'boolean' ? user.openToHousing : null
+ );
+ const [formatPreference, setFormatPreference] = useState(user.formatPreference || '');
+ const [priorities, setPriorities] = useState(user.priorities || {});
 
  React.useEffect(() => {
  if (visible) {
@@ -335,8 +375,13 @@ const EditProfileModal = ({ visible, user, onSave, onClose }) => {
  setReadiness(user.readiness || []);
  setGender(user.gender || '');
  setRace(user.race || []);
+ setAge(user.age || null);
+ setTravelWillingness(user.travelWillingness || '');
+ setOpenToHousing(typeof user.openToHousing === 'boolean' ? user.openToHousing : null);
+ setFormatPreference(user.formatPreference || '');
+ setPriorities(user.priorities || {});
  }
- }, [visible, user.name, user.location, user.grade, user.interests, user.gpaRange, user.readiness, user.gender, user.race]);
+ }, [visible, user.name, user.location, user.grade, user.interests, user.gpaRange, user.readiness, user.gender, user.race, user.age, user.travelWillingness, user.openToHousing, user.formatPreference, user.priorities]);
 
  const toggleInterest = (field) => {
  setInterests((prev) =>
@@ -366,6 +411,11 @@ const EditProfileModal = ({ visible, user, onSave, onClose }) => {
  const handleSave = () => {
  // FIX #1: auto-extract state from location so both fields stay in sync
  const autoState = extractStateAbbrev(location);
+ // Age is normally derived from the onboarding birthday. If the user edits the
+ // age pill here to something that no longer matches their stored birthday,
+ // the explicit age wins, so clear the stale birthday so matching (which prefers
+ // birthday) doesn't silently ignore their change.
+ const birthdayStillMatches = age != null && ageFromBirthday(user.birthday) === age;
  onSave({
  name,
  location,
@@ -375,8 +425,14 @@ const EditProfileModal = ({ visible, user, onSave, onClose }) => {
  readiness,
  gender,
  race,
+ age,
+ ...(user.birthday && !birthdayStillMatches ? { birthday: '' } : {}),
+ travelWillingness,
+ openToHousing,
+ formatPreference,
+ priorities,
  // Only update state from location if user hasn't explicitly set a
- // different state via the state picker — preserve explicit state choice
+ // different state via the state picker: preserve explicit state choice
  ...(autoState ? { state: autoState } : {}),
  });
  onClose();
@@ -451,6 +507,30 @@ const EditProfileModal = ({ visible, user, onSave, onClose }) => {
  )}
  </TouchableOpacity>
  ))}
+ </View>
+ </View>
+
+ <View style={styles.modalSection}>
+ <Text style={styles.modalLabel}>Age</Text>
+ <Text style={styles.modalHint}>
+ Optional. Some programs have age minimums (e.g. 16+) separate from grade.
+ </Text>
+ <View style={styles.interestGrid}>
+ {AGE_OPTIONS.map((a) => {
+ const active = age === a;
+ return (
+ <TouchableOpacity
+ key={a}
+ style={[styles.interestPill, active && styles.interestPillActive]}
+ onPress={() => setAge(active ? null : a)}
+ activeOpacity={0.7}
+ >
+ <Text style={[styles.interestPillText, active && styles.interestPillTextActive]}>
+ {a}
+ </Text>
+ </TouchableOpacity>
+ );
+ })}
  </View>
  </View>
 
@@ -530,6 +610,105 @@ const EditProfileModal = ({ visible, user, onSave, onClose }) => {
  </View>
  )}
  </TouchableOpacity>
+ );
+ })}
+ </View>
+ </View>
+
+ <View style={styles.modalSection}>
+ <Text style={styles.modalLabel}>Remote or in-person?</Text>
+ <Text style={styles.modalHint}>
+ Which format you prefer. This nudges your matches; it doesn't hide the other kind.
+ </Text>
+ <View style={styles.interestGrid}>
+ {FORMAT_PREF_OPTIONS.map((opt) => {
+ const active = formatPreference === opt.value;
+ return (
+ <TouchableOpacity
+ key={opt.value || 'none'}
+ style={[styles.interestPill, active && styles.interestPillActive]}
+ onPress={() => setFormatPreference(opt.value)}
+ activeOpacity={0.7}
+ >
+ <Text style={[styles.interestPillText, active && styles.interestPillTextActive]}>
+ {opt.label}
+ </Text>
+ </TouchableOpacity>
+ );
+ })}
+ </View>
+ </View>
+
+ <View style={styles.modalSection}>
+ <Text style={styles.modalLabel}>Travel & housing</Text>
+ <Text style={styles.modalHint}>
+ How far you'd go for a program, and whether residential programs with dorms interest you.
+ </Text>
+ <View style={styles.interestGrid}>
+ {TRAVEL_OPTIONS.map((opt) => {
+ const active = travelWillingness === opt.value;
+ return (
+ <TouchableOpacity
+ key={opt.value}
+ style={[styles.interestPill, active && styles.interestPillActive]}
+ onPress={() => setTravelWillingness(active ? '' : opt.value)}
+ activeOpacity={0.7}
+ >
+ <Text style={[styles.interestPillText, active && styles.interestPillTextActive]}>
+ {opt.label}
+ </Text>
+ </TouchableOpacity>
+ );
+ })}
+ </View>
+ <View style={[styles.interestGrid, { marginTop: Spacing[3] }]}>
+ {HOUSING_PREF_OPTIONS.map((opt) => {
+ const active = openToHousing === opt.value;
+ return (
+ <TouchableOpacity
+ key={String(opt.value)}
+ style={[styles.interestPill, active && styles.interestPillActive]}
+ onPress={() => setOpenToHousing(active ? null : opt.value)}
+ activeOpacity={0.7}
+ >
+ <Text style={[styles.interestPillText, active && styles.interestPillTextActive]}>
+ {opt.label}
+ </Text>
+ </TouchableOpacity>
+ );
+ })}
+ </View>
+ </View>
+
+ <View style={styles.modalSection}>
+ <Text style={styles.modalLabel}>Matching priorities</Text>
+ <Text style={styles.modalHint}>
+ Rate each 1–5 by how much it matters to you (3 = neutral). Weighs your match scores accordingly.
+ </Text>
+ <View style={styles.gradeList}>
+ {PRIORITY_FACTORS.map((factor) => {
+ const current = priorities[factor.key] || PRIORITY_DEFAULT;
+ return (
+ <View key={factor.key} style={styles.priorityRow}>
+ <Text style={styles.priorityLabel} numberOfLines={1}>{factor.label}</Text>
+ <View style={styles.prioritySegment}>
+ {PRIORITY_LEVELS.map((lvl) => {
+ const active = current === lvl;
+ return (
+ <TouchableOpacity
+ key={lvl}
+ style={[styles.prioritySegmentBtn, active && styles.prioritySegmentBtnActive]}
+ onPress={() => setPriorities((prev) => ({ ...prev, [factor.key]: lvl }))}
+ activeOpacity={0.7}
+ >
+ <Text style={[styles.prioritySegmentText, active && styles.prioritySegmentTextActive]}>
+ {lvl}
+ </Text>
+ </TouchableOpacity>
+ );
+ })}
+ </View>
+ </View>
  );
  })}
  </View>
@@ -1025,83 +1204,6 @@ export default function ProfileScreen({ navigation }) {
  );
  })()}
 
- {/* Premium */}
- {!isPremium ? (
- <TouchableOpacity
-   style={styles.premiumUpsell}
-   onPress={() => navigation?.navigate('Paywall')}
-   activeOpacity={0.85}
-   accessibilityRole="button"
-   accessibilityLabel="See Interny Premium"
- >
-   <View style={styles.premiumUpsellIcon}>
-     <Ionicons name="rocket-outline" size={20} color={Colors.accent} />
-   </View>
-   <View style={{ flex: 1 }}>
-     <Text style={styles.premiumUpsellTitle}>Interny Premium</Text>
-     <Text style={styles.premiumUpsellSub}>
-       Unlimited AI, essay review, interview prep, and more, for a one-time payment of $8 total.
-     </Text>
-   </View>
-   <Text style={styles.chevron}>›</Text>
- </TouchableOpacity>
- ) : (
- <SettingsSection title="Premium">
-   <SettingsRow
-     label="Interny Premium active"
-     sublabel={`One-time purchase${user.premiumEmail ? ` · ${user.premiumEmail}` : ''}`}
-     hasChevron={false}
-   />
-   <Divider />
-   <SettingsRow
-     label="Essay review"
-     sublabel={`${Math.max(0, ESSAY_REVIEWS_PER_MONTH - essaysUsed)} of ${ESSAY_REVIEWS_PER_MONTH} reviews left this month`}
-     onPress={() => navigation?.navigate('EssayReview')}
-     tourId="profile-essay"
-   />
-   <Divider />
-   <SettingsRow
-     label="Interview prep"
-     sublabel="100+ questions with hints, plus mock interviews"
-     onPress={() => navigation?.navigate('InterviewPrep')}
-     tourId="profile-interview"
-   />
-   <Divider />
-   <SettingsRow
-     label="How to apply"
-     sublabel="The full guide to applications and essay writing"
-     onPress={() => navigation?.navigate('ApplicationGuide')}
-     tourId="profile-guide"
-   />
-   <Divider />
-   <SettingsRow
-     label="Reminder timing"
-     sublabel={
-       user.reminderDays && user.reminderDays.length > 0
-         ? `Reminders at ${[...user.reminderDays].sort((a, b) => b - a).join(', ')} days before`
-         : `Standard (${FREE_REMINDER_DAYS.join(', ')} days before)`
-     }
-     onPress={() => setReminderModalVisible(true)}
-     tourId="profile-reminders"
-   />
-   <Divider />
-   <SettingsRow
-     label="Manage Premium"
-     sublabel="Payments launch soon. For now this turns Premium off."
-     onPress={() => {
-       Alert.alert(
-         'Turn off Premium?',
-         'This disables all premium features on this device. You can turn it back on anytime from the paywall.',
-         [
-           { text: 'Keep Premium', style: 'cancel' },
-           { text: 'Turn off', style: 'destructive', onPress: deactivatePremium },
-         ],
-       );
-     }}
-   />
- </SettingsSection>
- )}
-
  {/* Preferences */}
  <SettingsSection title="Preferences">
  <SettingsRow
@@ -1110,6 +1212,7 @@ export default function ProfileScreen({ navigation }) {
  toggle
  toggleValue={user.notificationsOn ?? true}
  onToggle={handleToggleNotifications}
+ tourId="profile-notifications"
  />
  {(user.notificationsOn ?? true) && (
  <>
@@ -1837,6 +1940,43 @@ const styles = StyleSheet.create({
  color: Colors.accent,
  fontWeight: Typography.weight.semibold,
  },
+
+ // Matching priorities (edit modal)
+ priorityRow: {
+ flexDirection: 'row',
+ alignItems: 'center',
+ justifyContent: 'space-between',
+ gap: Spacing[3],
+ padding: Spacing[3],
+ borderRadius: Radii.lg,
+ borderWidth: 1.5,
+ borderColor: Colors.border,
+ backgroundColor: Colors.surface,
+ },
+ priorityLabel: {
+ flex: 1,
+ fontSize: Typography.size.base,
+ fontWeight: Typography.weight.medium,
+ color: Colors.textPrimary,
+ },
+ prioritySegment: {
+ flexDirection: 'row',
+ borderRadius: Radii.full,
+ backgroundColor: Colors.surfaceSecondary,
+ padding: 2,
+ },
+ prioritySegmentBtn: {
+ paddingHorizontal: Spacing[3],
+ paddingVertical: Spacing[1],
+ borderRadius: Radii.full,
+ },
+ prioritySegmentBtnActive: { backgroundColor: Colors.accent },
+ prioritySegmentText: {
+ fontSize: Typography.size.sm,
+ fontWeight: Typography.weight.medium,
+ color: Colors.textSecondary,
+ },
+ prioritySegmentTextActive: { color: Colors.white, fontWeight: Typography.weight.semibold },
  strengthEditBtn: {
  height: 40,
  borderRadius: Radii.lg,

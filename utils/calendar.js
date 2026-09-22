@@ -68,7 +68,7 @@ async function getWritableCalendarId() {
  * exists on the same calendar on the same date, shows a message instead of
  * creating a second one.
  *
- * @param {object} item — Internship object from data.js (must have role, company, deadline, url).
+ * @param {object} item Internship object from data.js (must have role, company, deadline, url).
  */
 export async function addDeadlineToCalendar(item) {
   try {
@@ -82,7 +82,7 @@ export async function addDeadlineToCalendar(item) {
       return;
     }
 
-    // 2. Parse the deadline date — prefer the ISO deadlineDate field first
+    // 2. Parse the deadline date: prefer the ISO deadlineDate field first
     let startDate = null;
 
     if (item.deadlineDate) {
@@ -117,7 +117,7 @@ export async function addDeadlineToCalendar(item) {
       return;
     }
 
-    // 4. Duplicate guard — check if an event with the same title already exists
+    // 4. Duplicate guard: check if an event with the same title already exists
     //    on this calendar within a ±1-day window around the deadline.
     const eventTitle = `Apply: ${item.role} at ${item.company}`;
     const windowStart = new Date(startDate.getTime() - 24 * 60 * 60 * 1000);
@@ -148,7 +148,7 @@ export async function addDeadlineToCalendar(item) {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
 
-    // 6. Success alert — show a human-readable date, not a raw ISO string
+    // 6. Success alert: show a human-readable date, not a raw ISO string
     const readableDate = startDate.toLocaleDateString('en-US', {
       month: 'long',
       day: 'numeric',

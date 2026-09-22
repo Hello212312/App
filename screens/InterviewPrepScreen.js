@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useUser } from '../context/UserContext';
+import { posthog } from '../utils/posthog';
 import { Colors, Radii, Shadows, Spacing, Typography } from '../theme';
 import {
   FIELD_ORDER,
@@ -78,6 +79,7 @@ export default function InterviewPrepScreen({ route, navigation }) {
       setOpenQ(null);
     } else {
       setOpenQ(item.q);
+      if (!practiced[key]) posthog.capture('interview_question_practiced', { field });
       setPracticed((prev) => ({ ...prev, [key]: true }));
     }
   };

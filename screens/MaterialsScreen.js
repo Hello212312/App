@@ -569,16 +569,6 @@ export default function MaterialsScreen({ navigation }) {
         ))}
       </View>
 
-      {/* Premium: essay review quick link */}
-      <TouchableOpacity
-        style={styles.essayReviewBanner}
-        onPress={() => navigation?.navigate('EssayReview')}
-        activeOpacity={0.85}
-      >
-        <Text style={styles.essayReviewBannerText}>Get an essay reviewed</Text>
-        <Text style={styles.essayReviewBannerArrow}>›</Text>
-      </TouchableOpacity>
-
       {/* Content */}
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         {tab === 'materials' ? (

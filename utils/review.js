@@ -1,7 +1,7 @@
 import { Linking, Platform } from 'react-native';
 import * as StoreReview from 'expo-store-review';
 
-// Fill in once the app has a live App Store listing — until then the iOS
+// Fill in once the app has a live App Store listing. Until then, the iOS
 // "Rate us" button falls back to opening the App Store search page.
 const IOS_APP_STORE_ID = null; // e.g. '1234567890'
 const ANDROID_PACKAGE = 'com.interny.app';
@@ -20,21 +20,21 @@ export async function openStoreReview() {
     const url = getStoreReviewUrl();
     await Linking.openURL(url);
   } catch {
-    // Best-effort — a dead link here shouldn't crash the app.
+    // Best-effort: a dead link here shouldn't crash the app.
   }
 }
 
 // Best-effort native prompt (SKStoreReviewController / Play In-App Review).
 // Both platforms throttle or silently no-op this depending on build channel
 // and how many times it's already been shown, so it's never guaranteed to
-// display — callers should not rely on it as the sole review mechanism.
+// display, so callers should not rely on it as the sole review mechanism.
 export async function requestNativeReview() {
   try {
     const isAvailable = await StoreReview.isAvailableAsync();
     if (!isAvailable) return;
     await StoreReview.requestReview();
   } catch {
-    // Review prompts are best-effort — never let a StoreKit error surface.
+    // Review prompts are best-effort: never let a StoreKit error surface.
   }
 }
 

@@ -4,7 +4,7 @@
 // interviewing for internships, research programs, and pre-college programs.
 // All questions are practice prompts, not claims about any specific program.
 //
-// Shape: every question is { q, hint } — the hint is a short coaching note on
+// Shape: every question is { q, hint }, where the hint is a short coaching note on
 // what a strong answer includes, revealed in the app when the card is opened.
 
 export const GENERAL_QUESTIONS = [

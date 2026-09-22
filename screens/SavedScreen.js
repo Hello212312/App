@@ -1,5 +1,5 @@
 // screens/SavedScreen.js
-// Saved / bookmarked internships — reads from UserContext.
+// Saved / bookmarked internships: reads from UserContext.
 //
 // NEW FEATURES:
 // • "Similar to what you saved" recommendation rail (getSimilarRecommendations)
@@ -135,7 +135,7 @@ export default function SavedScreen({ navigation }) {
  const { savedIds, statusMap, toggleSaved, user } = useUser();
  const [activeTab, setActiveTab] = useState('all');
 
- // Recompute when the module-level INTERNSHIPS list finishes loading —
+ // Recompute when the module-level INTERNSHIPS list finishes loading,
  // otherwise this screen stays empty if opened before the fetch resolves.
  const [internshipsVersion, setInternshipsVersion] = useState(0);
  useEffect(() => subscribeToInternships(() => setInternshipsVersion((v) => v + 1)), []);

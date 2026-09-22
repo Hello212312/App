@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-05",
+  "catalogRows": 811,
+  "checks": [
+    "Onboarding four-step completion",
+    "Draft restored after reload",
+    "Returning profile preserves grade and interests",
+    "Changed interests update Home without restart",
+    "Changed interests persist after reload",
+    "Saved item appears in Tracker",
+    "Match details modal opens and closes",
+    "Phone viewport scrolling and fixed footer"
+  ],
+  "runtimeErrors": []
+}

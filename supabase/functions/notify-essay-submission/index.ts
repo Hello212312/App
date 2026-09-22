@@ -1,10 +1,10 @@
 // Sends you an email whenever someone submits an essay for review, with
-// Reply-To set to the submitter — so you can just hit reply in your inbox to
+// Reply-To set to the submitter, so you can just hit reply in your inbox to
 // send feedback back. This is the missing piece that makes essay review a
 // real (human) pipeline instead of a write-only table nobody looks at.
 //
 // Setup required:
-//   1. Sign up at resend.com (or another transactional email API — adjust
+//   1. Sign up at resend.com (or another transactional email API; adjust
 //      the fetch call below if you use a different provider). Verify a
 //      sending domain, or use Resend's shared test domain to start.
 //   2. Create an API key, then:
@@ -14,7 +14,7 @@
 //        supabase secrets set NOTIFY_FROM_EMAIL="Interny Essays <essays@yourdomain.com>"
 //   3. Deploy this function: supabase functions deploy notify-essay-submission
 //   4. Run the migration in supabase/migrations/ that adds the Postgres
-//      trigger calling this function on every essay_reviews insert — replace
+//      trigger calling this function on every essay_reviews insert; replace
 //      the placeholder secret in that file with the same NOTIFY_WEBHOOK_SECRET
 //      value before running it.
 
@@ -22,6 +22,24 @@ const RESEND_API_KEY        = Deno.env.get('RESEND_API_KEY') ?? '';
 const ADMIN_NOTIFY_EMAIL    = Deno.env.get('ADMIN_NOTIFY_EMAIL') ?? '';
 const FROM_EMAIL            = Deno.env.get('NOTIFY_FROM_EMAIL') ?? 'Interny Essays <onboarding@resend.dev>';
 const NOTIFY_WEBHOOK_SECRET = Deno.env.get('NOTIFY_WEBHOOK_SECRET') ?? '';
+
+const POSTHOG_API_KEY = Deno.env.get('POSTHOG_API_KEY') ?? '';
+const POSTHOG_HOST    = Deno.env.get('POSTHOG_HOST') ?? 'https://us.i.posthog.com';
+
+// Submitter email isn't sent as the PostHog distinct_id (PII); this just
+// tracks server-side delivery volume/success for the notification pipeline.
+async function capturePosthog(event: string, properties: Record<string, unknown> = {}) {
+  if (!POSTHOG_API_KEY) return;
+  try {
+    await fetch(`${POSTHOG_HOST}/i/v0/e/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ api_key: POSTHOG_API_KEY, event, distinct_id: crypto.randomUUID(), properties }),
+    });
+  } catch (e) {
+    console.warn('[posthog] capture error:', e);
+  }
+}
 
 Deno.serve(async (req) => {
   if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 });
@@ -45,8 +63,8 @@ Deno.serve(async (req) => {
   const html = `
     <h2>New essay review submission</h2>
     <p><strong>From:</strong> ${escapeHtml(email || 'no email given')}</p>
-    <p><strong>Program:</strong> ${escapeHtml(program || '—')}</p>
-    <p><strong>Title:</strong> ${escapeHtml(essay_title || '—')}</p>
+    <p><strong>Program:</strong> ${escapeHtml(program || 'Not provided')}</p>
+    <p><strong>Title:</strong> ${escapeHtml(essay_title || 'Not provided')}</p>
     ${notes ? `<p><strong>Notes from student:</strong> ${escapeHtml(notes)}</p>` : ''}
     <hr />
     <pre style="white-space: pre-wrap; font-family: inherit;">${escapeHtml(essay_text || '')}</pre>
@@ -69,9 +87,11 @@ Deno.serve(async (req) => {
 
   if (!res.ok) {
     console.error('resend error', await res.text());
+    await capturePosthog('essay_review_notify_failed', { program: program || null });
     return new Response('email failed', { status: 500 });
   }
 
+  await capturePosthog('essay_review_notify_sent', { program: program || null });
   return new Response('ok', { status: 200 });
 });
 

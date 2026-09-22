@@ -43,6 +43,24 @@ const CORS = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
+const POSTHOG_API_KEY = Deno.env.get('POSTHOG_API_KEY') ?? '';
+const POSTHOG_HOST    = Deno.env.get('POSTHOG_HOST') ?? 'https://us.i.posthog.com';
+
+// No per-device id is sent to this endpoint, so events aren't tied to a
+// person — just used to track resume-parse volume/success rate server-side.
+async function capturePosthog(event: string, properties: Record<string, unknown> = {}) {
+  if (!POSTHOG_API_KEY) return;
+  try {
+    await fetch(`${POSTHOG_HOST}/i/v0/e/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ api_key: POSTHOG_API_KEY, event, distinct_id: crypto.randomUUID(), properties }),
+    });
+  } catch (e) {
+    console.warn('[posthog] capture error:', e);
+  }
+}
+
 function isDocx(mimeType: string, fileName: string): boolean {
   const ext = fileName.split('.').pop()?.toLowerCase() ?? '';
   return ext === 'docx' || ext === 'doc'
@@ -75,7 +93,7 @@ Deno.serve(async (req) => {
   // Resolve application/octet-stream to a real MIME type from the file extension.
   const effectiveMime = normalizeMimeType(mime_type, file_name);
 
-  // Google Workspace native formats cannot be decoded — reject immediately.
+  // Google Workspace native formats cannot be decoded, so reject immediately.
   if (effectiveMime.startsWith('application/vnd.google-apps.')) {
     return json({ error: 'UNSUPPORTED_FORMAT' }, 400);
   }
@@ -84,8 +102,10 @@ Deno.serve(async (req) => {
   if (effectiveMime === 'text/plain' || effectiveMime.startsWith('text/')) {
     try {
       const text = new TextDecoder().decode(Uint8Array.from(atob(file_data), (c) => c.charCodeAt(0)));
+      await capturePosthog('resume_parsed', { format: 'text' });
       return json({ text: text.trim() });
     } catch {
+      await capturePosthog('resume_parse_failed', { format: 'text', error: 'DECODE_FAILED' });
       return json({ error: 'DECODE_FAILED' }, 400);
     }
   }
@@ -94,10 +114,15 @@ Deno.serve(async (req) => {
   if (isDocx(effectiveMime, file_name)) {
     try {
       const text = await extractDocxText(file_data);
-      if (!text) return json({ error: 'EMPTY_EXTRACTION' }, 500);
+      if (!text) {
+        await capturePosthog('resume_parse_failed', { format: 'docx', error: 'EMPTY_EXTRACTION' });
+        return json({ error: 'EMPTY_EXTRACTION' }, 500);
+      }
+      await capturePosthog('resume_parsed', { format: 'docx' });
       return json({ text });
     } catch (e) {
       console.error('docx parse error', e);
+      await capturePosthog('resume_parse_failed', { format: 'docx', error: 'DOCX_PARSE_FAILED' });
       return json({ error: 'DOCX_PARSE_FAILED' }, 500);
     }
   }
@@ -107,7 +132,7 @@ Deno.serve(async (req) => {
     return json({ error: 'UNSUPPORTED_FORMAT' }, 400);
   }
 
-  // PDF / image — send to Gemini, rotating through keys on 429.
+  // PDF / image: send to Gemini, rotating through keys on 429.
   const geminiPayload = JSON.stringify({
     contents: [{
       parts: [
@@ -131,12 +156,20 @@ Deno.serve(async (req) => {
   }
 
   const data = await res.json();
-  if (!res.ok) { console.error('gemini error', data); return json({ error: 'GEMINI_ERROR' }, 500); }
+  if (!res.ok) {
+    console.error('gemini error', data);
+    await capturePosthog('resume_parse_failed', { format: effectiveMime, error: 'GEMINI_ERROR' });
+    return json({ error: 'GEMINI_ERROR' }, 500);
+  }
 
   const text = (data?.candidates?.[0]?.content?.parts ?? [])
     .map((p) => p.text || '').join('').trim();
 
-  if (!text) return json({ error: 'EMPTY_EXTRACTION' }, 500);
+  if (!text) {
+    await capturePosthog('resume_parse_failed', { format: effectiveMime, error: 'EMPTY_EXTRACTION' });
+    return json({ error: 'EMPTY_EXTRACTION' }, 500);
+  }
+  await capturePosthog('resume_parsed', { format: effectiveMime });
   return json({ text });
 });
 

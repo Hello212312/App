@@ -1,9 +1,9 @@
 // data.js
-// Internship data — fetched live from Supabase.
+// Internship data, fetched live from Supabase.
 // Falls back to an empty array (with a clear warning) if the fetch fails,
 // so the app never crashes due to a network error.
 //
-// Usage (same as before — nothing else in the app needs to change):
+// Usage (same as before: nothing else in the app needs to change):
 // import { INTERNSHIPS, loadInternships } from './data';
 //
 // Call loadInternships() once at app startup (in App.js),
@@ -40,12 +40,12 @@ function rowToInternship(row) {
        if (diffDays >= 0) {
          daysLeft = diffDays;
        }
-       // If diffDays < 0 (past), leave daysLeft as null — no badge shown.
+       // If diffDays < 0 (past), leave daysLeft as null, so no badge is shown.
      }
    }
  }
 
- // The DB column is "location(Remote/InPerson,Hybrid)" — there is no bare "location" column.
+ // The DB column is "location(Remote/InPerson,Hybrid)": there is no bare "location" column.
  // We use the full locationFormat string as item.location so that all downstream
  // matching, display, and filter logic that reads item.location works correctly.
  const locationFormat = row['location(Remote/InPerson,Hybrid)'] ?? '';
@@ -75,14 +75,22 @@ function rowToInternship(row) {
  daysLeft,
  createdAt: row.created_at ?? null,   // powers premium early-access window
  applicationChecklist: row['ApplicationChecklist'] ?? '',
- requiredState: row.Required_State ?? '',        // structured hard-eligibility state requirement
+ requiredState: row.Required_State ?? '',        // legacy free-text location requirement (fallback)
  requiredRace: row.Required_Race ?? '',          // structured hard-eligibility race requirement
+ // Structured eligibility + logistics (populated over time by the verification workflow)
+ minAge: row.min_age ?? null,                     // minimum age required, e.g. 16; null = none
+ maxAge: row.max_age ?? null,                     // maximum age allowed; null = none
+ requiredGender: row.required_gender ?? null,     // 'female' | 'male' | 'nonbinary' | null = open
+ locationEligibility: Array.isArray(row.location_eligibility) ? row.location_eligibility : null,
+ //   ↑ [{ type: 'state'|'city'|'county'|'zip'|'district'|'region', value, state }]: match ANY entry
+ housing: row.housing ?? null,                    // 'provided' | 'optional' | 'none' | null = unknown
+ commuteTo: row.CommuteTo ?? null,                 // true = in-person site students commute to (not "must live in that exact city"); null = unknown
  };
 }
 
 // MODULE STATE 
 
-// Starts empty — populated by loadInternships() on app startup.
+// Starts empty; populated by loadInternships() on app startup.
 export let INTERNSHIPS = [];
 
 let _loaded = false;
@@ -111,7 +119,7 @@ function _notify() {
 
 /**
  * Fetches all internships from Supabase and populates INTERNSHIPS.
- * Safe to call multiple times — only fetches once.
+ * Safe to call multiple times: only fetches once.
  *
  * @returns {Promise<object[]>} The loaded internships array.
  */
@@ -139,7 +147,7 @@ export async function loadInternships() {
 
  if (error) throw error;
 
- // A refresh started after this fetch — discard this (now stale) result.
+ // A refresh started after this fetch, so discard this (now stale) result.
  if (gen !== _fetchGen) return INTERNSHIPS;
 
  INTERNSHIPS = (data ?? []).map(rowToInternship);

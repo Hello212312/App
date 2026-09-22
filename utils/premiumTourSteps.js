@@ -30,7 +30,7 @@ export function buildPremiumTourSteps({ savedIds = [], internships = [] } = {}) 
       targetId: 'profile-essay',
       scrollId: 'profile-scroll',
       title: 'Essay review',
-      body: 'Submit up to 2 essays a month. A human reviews them and emails you personal feedback within 3–5 days.',
+      body: 'Submit up to 2 essays a month. A human reviews them and emails you personal feedback within 3 to 5 days.',
     },
     {
       id: 'interview-prep',

@@ -1,4 +1,4 @@
-// App.js — Root navigator
+// App.js: Root navigator
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,25 +7,22 @@ import * as Notifications from 'expo-notifications';
 import React, { useEffect, useRef } from 'react';
 import { Linking, Platform, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PostHogProvider, useNavigationTracker } from 'posthog-react-native';
 import PremiumTourOverlay from './components/PremiumTourOverlay';
 import ReviewPromptModal from './components/ReviewPromptModal';
 import { TourProvider } from './context/TourContext';
-import { UserProvider, useUser } from './context/UserContext';
+import { ONBOARDING_VERSION, UserProvider, useUser } from './context/UserContext';
 import { INTERNSHIPS, loadInternships } from './data';
+import { posthog } from './utils/posthog';
 
-import ChatScreen from './screens/ChatScreen';
 import ClosingSoonScreen from './screens/ClosingSoonScreen';
 import DeadlinesScreen from './screens/DeadlinesScreen';
-import ApplicationGuideScreen from './screens/ApplicationGuideScreen';
 import DetailScreen from './screens/DetailScreen';
 import HomeScreen from './screens/HomeScreen';
 import MaterialsScreen from './screens/MaterialsScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SavedScreen from './screens/SavedScreen';
-import PaywallScreen from './screens/PaywallScreen';
-import EssayReviewScreen from './screens/EssayReviewScreen';
-import InterviewPrepScreen from './screens/InterviewPrepScreen';
 import SearchScreen from './screens/SearchScreen';
 import TrackerScreen from './screens/TrackerScreen';
 
@@ -54,7 +51,7 @@ class ErrorBoundary extends React.Component {
 }
 
 // ─── NOTIFICATION HANDLER ─────────────────────────────────────────────────────
-// SDK 54: shouldShowAlert is deprecated — use shouldShowBanner + shouldShowList.
+// SDK 54: shouldShowAlert is deprecated; use shouldShowBanner + shouldShowList instead.
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -65,9 +62,9 @@ Notifications.setNotificationHandler({
   }),
 });
 
-// Explicit channel creation, not just app.json's `defaultChannel` config —
-// the config plugin only takes effect on a fresh native prebuild, so an
-// existing dev/production build that predates it would otherwise route
+// Explicit channel creation, not just app.json's `defaultChannel` config,
+// because the config plugin only takes effect on a fresh native prebuild.
+// An existing dev/production build that predates it would otherwise route
 // deadline reminders into Android's generic low-importance channel and
 // never surface them.
 if (Platform.OS === 'android') {
@@ -107,7 +104,6 @@ const Tab   = createBottomTabNavigator();
 const TAB_ICONS = {
   Home:      { focused: 'home',            unfocused: 'home-outline' },
   Search:    { focused: 'search',          unfocused: 'search-outline' },
-  Ask:       { focused: 'sparkles',        unfocused: 'sparkles-outline' },
   Tracker:   { focused: 'layers',          unfocused: 'layers-outline' },
   Profile:   { focused: 'person-circle',   unfocused: 'person-circle-outline' },
 };
@@ -136,9 +132,9 @@ function MainTabs() {
           borderTopColor: Colors.border,
           backgroundColor: Colors.surface,
           paddingTop: 6,
-          // NOTE: no hardcoded height/paddingBottom — overriding them prevents
-          // React Navigation from applying the bottom safe-area inset, which
-          // makes the tab bar collide with the home indicator on Face ID iPhones.
+          // NOTE: no hardcoded height/paddingBottom, because overriding them
+          // prevents React Navigation from applying the bottom safe-area inset,
+          // which makes the tab bar collide with the home indicator on Face ID iPhones.
         },
         tabBarLabelStyle: {
           fontSize: Typography.size.xs,
@@ -153,7 +149,6 @@ function MainTabs() {
       <Tab.Screen name="Home"      component={HomeScreen} />
       <Tab.Screen name="Search"    component={SearchScreen} />
       <Tab.Screen name="Tracker"   component={TrackerScreen} />
-      <Tab.Screen name="Ask"       component={ChatScreen} />
       <Tab.Screen name="Profile"   component={ProfileScreen} />
     </Tab.Navigator>
   );
@@ -165,11 +160,14 @@ function RootNavigator() {
   const { user, loaded, setUser } = useUser();
   const navRef = useRef(null);
 
+  // Autocaptures a PostHog "$screen" event on every navigation state change.
+  useNavigationTracker(undefined, navRef, posthog);
+
   // NOTE: loadInternships / subscribeToInternships are handled in App() below
   // and in UserContext respectively. We no longer subscribe here or schedule
-  // notifications here — UserContext is the single source of truth for that.
+  // notifications here: UserContext is the single source of truth for that.
 
-  // Increment open count — UserContext watches this (plus days since first
+  // Increment open count. UserContext watches this (plus days since first
   // launch) to decide when to surface the review prompt.
   useEffect(() => {
     if (!loaded) return;
@@ -180,14 +178,18 @@ function RootNavigator() {
   // Once storage has loaded, route the user correctly.
   useEffect(() => {
     if (!loaded) return;
-    if (user.onboardingDone && navRef.current) {
+    // onboardingVersion must also match the current version: a bump forces
+    // every existing user back through onboarding once, even if they'd
+    // already finished it under an older version.
+    if (user.onboardingDone && user.onboardingVersion === ONBOARDING_VERSION && navRef.current) {
       navRef.current.reset({ index: 0, routes: [{ name: 'Main' }] });
       // The first-launch feature tour auto-starts from TourContext once Main renders.
     }
-  }, [loaded, user.onboardingDone]);
+  }, [loaded, user.onboardingDone, user.onboardingVersion]);
 
   // Tapping a "closing soon" notification opens that internship's detail card.
   useEffect(() => {
+    if (Platform.OS === 'web') return;
     const sub = Notifications.addNotificationResponseReceivedListener((response) => {
       const id = response.notification.request.content.data?.internshipId;
       navigateToInternship(navRef, id);
@@ -211,7 +213,7 @@ function RootNavigator() {
   return (
     <TourProvider navRef={navRef}>
       <NavigationContainer ref={navRef}>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false, cardStyle: Platform.OS === 'web' ? {flex: 1, height: '100%', maxHeight: '100%', overflow: 'hidden'} : undefined }}>
           <Stack.Screen name="Onboarding"  component={OnboardingScreen} />
           <Stack.Screen name="Main"       component={MainTabs} />
           <Stack.Screen name="Detail"     component={DetailScreen} />
@@ -219,14 +221,9 @@ function RootNavigator() {
           <Stack.Screen name="ClosingSoon"   component={ClosingSoonScreen} />
           <Stack.Screen name="Saved"         component={SavedScreen} />
           <Stack.Screen name="Materials"  component={MaterialsScreen} />
-          <Stack.Screen name="Paywall"       component={PaywallScreen} />
-          <Stack.Screen name="EssayReview"   component={EssayReviewScreen} />
-          <Stack.Screen name="InterviewPrep" component={InterviewPrepScreen} />
-          <Stack.Screen name="ApplicationGuide" component={ApplicationGuideScreen} />
         </Stack.Navigator>
 
-        {/* Spotlight tours (feature tour after onboarding, premium tour after
-            upgrade) — auto-start from TourContext */}
+        {/* Spotlight tours (feature tour after onboarding): auto-start from TourContext */}
         <PremiumTourOverlay />
         <ReviewPromptModal />
       </NavigationContainer>
@@ -238,15 +235,17 @@ function RootNavigator() {
 
 export default function App() {
   useEffect(() => {
-    loadInternships(); // fire and forget — screens update via subscribeToInternships
+    loadInternships(); // fire and forget, since screens update via subscribeToInternships
   }, []);
 
   return (
     <SafeAreaProvider>
       <ErrorBoundary>
-        <UserProvider>
-          <RootNavigator />
-        </UserProvider>
+        <PostHogProvider client={posthog} autocapture={{ captureTouches: true, captureScreens: false, captureLifecycleEvents: true }}>
+          <UserProvider>
+            <RootNavigator />
+          </UserProvider>
+        </PostHogProvider>
       </ErrorBoundary>
     </SafeAreaProvider>
   );

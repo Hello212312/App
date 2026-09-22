@@ -7,6 +7,7 @@ import { INTERNSHIPS, subscribeToInternships } from '../data';
 import { Colors, Radii, Shadows, Spacing, Typography } from '../theme';
 import { getEffectiveDaysLeft } from '../utils/matching';
 
+
 export default function ClosingSoonScreen({ navigation }) {
   const [internships, setInternships] = useState(INTERNSHIPS);
 

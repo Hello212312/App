@@ -1,8 +1,8 @@
-// theme.js — Single source of truth for all design tokens
+// theme.js: Single source of truth for all design tokens
 // 8px grid system, 60-30-10 color rule, Inter typography
 
 export const Colors = {
-  // 60% — Background & surfaces
+  // 60%: Background & surfaces
   background: '#F8FAFC',
   surface: '#FFFFFF',
   surfaceSecondary: '#F1F5F9',
@@ -11,13 +11,13 @@ export const Colors = {
   border: '#E2E8F0',
   divider: '#F1F5F9',
 
-  // 30% — Text hierarchy
+  // 30%: Text hierarchy
   textPrimary: '#0F172A',
   textSecondary: '#64748B',
   textTertiary: '#6B7280', // was #94A3B8 (2.6:1, failed WCAG AA); now ~4.8:1 on white
   textDisabled: '#CBD5E1',
 
-  // 10% — Accent (electric blue — used sparingly)
+  // 10%: Accent (electric blue, used sparingly)
   accent: '#2563EB',
   accentLight: '#EFF6FF',
   accentMuted: '#BFDBFE',
@@ -63,7 +63,7 @@ export const Typography = {
 
   // Scale (8px base)
   size: {
-    xs: 12, // was 11 — raised for legibility (labels, badges)
+    xs: 12, // was 11, raised for legibility (labels, badges)
     sm: 12,
     base: 14,
     md: 15,
@@ -124,7 +124,7 @@ export const Radii = {
 };
 
 export const Shadows = {
-  // Subtle, single-direction — not heavy
+  // Subtle, single-direction, not heavy
   card: {
     shadowColor: '#0F172A',
     shadowOffset: { width: 0, height: 1 },

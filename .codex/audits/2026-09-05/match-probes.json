@@ -1,0 +1,996 @@
+{
+  "date": "2026-09-05T04:44:08.269Z",
+  "fixtures": "Synthetic diagnostic inputs; not real program listings or screenshot content.",
+  "remoteOnlyNationwidePasses": true,
+  "results": [
+    {
+      "name": "Missing birthday, requires age 16+",
+      "score": 81,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Fully remote",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 15,
+          "max": 24,
+          "detail": "Remote, a strong option many students prefer"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Missing gender, explicitly female-only",
+      "score": 81,
+      "eligibility": {
+        "eligible": true,
+        "unknown": true,
+        "requiredStates": [],
+        "requiredGenders": [
+          "female"
+        ],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Fully remote",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 15,
+          "max": 24,
+          "detail": "Remote, a strong option many students prefer"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Only grade entered",
+      "score": 54,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "10th Grade eligible",
+        "Fully remote",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 20,
+          "max": 40,
+          "detail": "No interests set on your profile, neutral score given"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 8,
+          "max": 24,
+          "detail": "Remote program, no location set on your profile"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Only a default priority entered",
+      "score": 50,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Fully remote",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 20,
+          "max": 40,
+          "detail": "No interests set on your profile, neutral score given"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 5,
+          "max": 12,
+          "detail": "No grade set on your profile, neutral score given"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 8,
+          "max": 24,
+          "detail": "Remote program, no location set on your profile"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Stay local: Richmond VA student, Los Angeles CA program",
+      "score": 67,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 1,
+          "max": 24,
+          "detail": "Would require commuting or relocating outside your area"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Stay local + interests most important: distant program",
+      "score": 75,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 72,
+          "max": 72,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 1,
+          "max": 24,
+          "detail": "Would require commuting or relocating outside your area"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Stay local: San Diego CA student, San Francisco CA program",
+      "score": 87,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "In your state",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 21,
+          "max": 24,
+          "detail": "In CA, your home state"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Unknown pay information",
+      "score": 76,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Fully remote"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 15,
+          "max": 24,
+          "detail": "Remote, a strong option many students prefer"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 3,
+          "max": 8,
+          "detail": "Unpaid, but free to attend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Featured on",
+      "score": 84,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Fully remote",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 15,
+          "max": 24,
+          "detail": "Remote, a strong option many students prefer"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 3,
+          "max": 3,
+          "detail": "Featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Featured off",
+      "score": 81,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Fully remote",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 15,
+          "max": 24,
+          "detail": "Remote, a strong option many students prefer"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Low GPA, prestige priority 5: competitive",
+      "score": 80,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Fully remote",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 15,
+          "max": 24,
+          "detail": "Remote, a strong option many students prefer"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 14,
+          "max": 18,
+          "detail": "Competitive program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Low GPA, prestige priority 5: open",
+      "score": 83,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Fully remote",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 15,
+          "max": 24,
+          "detail": "Remote, a strong option many students prefer"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 18,
+          "max": 18,
+          "detail": "Open apply program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Remote-only: nationwide in-person location",
+      "score": 66,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "Open nationwide",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 0,
+          "max": 24,
+          "detail": "In-person only, but you're set to remote-only"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    },
+    {
+      "name": "Age text in grade field: Ages 10-18, actual grade 11",
+      "score": 0,
+      "eligibility": {
+        "eligible": false,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "failedOn": "grade",
+        "reason": "This program is only open to Ages 10-18. Your profile says you're in grade 11, so you don't meet its grade requirement."
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Not eligible: grade",
+        "Matches Computer Science"
+      ],
+      "categories": [
+        {
+          "key": "eligibility",
+          "label": "Eligibility",
+          "points": 0,
+          "max": 100,
+          "detail": "This program is only open to Ages 10-18. Your profile says you're in grade 11, so you don't meet its grade requirement."
+        }
+      ]
+    },
+    {
+      "name": "Explicit Oregon location with ambiguous city lookup",
+      "score": 87,
+      "eligibility": {
+        "eligible": true,
+        "requiredStates": [],
+        "requiredGenders": [],
+        "requiredRaces": [],
+        "reason": ""
+      },
+      "ageFit": "eligible",
+      "reasons": [
+        "Matches Computer Science",
+        "10th Grade eligible",
+        "In your state",
+        "Stipend"
+      ],
+      "categories": [
+        {
+          "key": "interests",
+          "label": "Interests",
+          "points": 40,
+          "max": 40,
+          "detail": "Matches your Computer Science interest, this program's main focus"
+        },
+        {
+          "key": "grade",
+          "label": "Grade & age",
+          "points": 9,
+          "max": 12,
+          "detail": "You're eligible at your grade (10th Grade)"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "points": 21,
+          "max": 24,
+          "detail": "In OR, your home state"
+        },
+        {
+          "key": "compensation",
+          "label": "Compensation",
+          "points": 8,
+          "max": 8,
+          "detail": "Pays you a stipend"
+        },
+        {
+          "key": "featured",
+          "label": "Featured",
+          "points": 0,
+          "max": 3,
+          "detail": "Not a featured program"
+        },
+        {
+          "key": "school",
+          "label": "School match",
+          "points": 0,
+          "max": 3,
+          "detail": "Doesn't mention your school or district"
+        },
+        {
+          "key": "competitiveness",
+          "label": "Profile fit",
+          "points": 9,
+          "max": 10,
+          "detail": "Moderate program, weighed against your profile"
+        }
+      ]
+    }
+  ]
+}

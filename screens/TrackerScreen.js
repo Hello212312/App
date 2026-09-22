@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { CompanyLogo, DeadlineBadge, PremiumUpsellBanner } from '../components';
+import { CompanyLogo, DeadlineBadge } from '../components';
 import {
   APPLICATION_STATUSES,
   DECIDED_STATUSES,
@@ -59,7 +59,7 @@ function getLiveDaysLeft(app) {
 
 const StatsHeader = ({ apps }) => {
   const counts = useMemo(() => {
-    // Saved is a wishlist, not an application — count it separately so
+    // Saved is a wishlist, not an application, so count it separately so
     // "Applied" style stats only reflect real pipeline movement.
     const c = { saved: 0, applying: 0, submitted: 0, decided: 0 };
     apps.forEach((a) => {
@@ -195,7 +195,7 @@ export default function TrackerScreen({ navigation }) {
   const [pipelineFilter, setPipelineFilter] = useState('active');
 
   // INTERNSHIPS is module state that may still be empty when this screen first
-  // mounts (cold start straight to this tab) — bump a version when it loads so
+  // mounts (cold start straight to this tab), so bump a version when it loads so
   // the memos below recompute with real data.
   const [internshipsVersion, setInternshipsVersion] = useState(0);
   useEffect(() => subscribeToInternships(() => setInternshipsVersion((v) => v + 1)), []);
@@ -233,7 +233,7 @@ export default function TrackerScreen({ navigation }) {
       })
     );
     return map;
-  // getLiveDaysLeft reads module INTERNSHIPS — resort when that data loads
+  // getLiveDaysLeft reads module INTERNSHIPS, so resort when that data loads
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtered, internshipsVersion]);
 
@@ -250,17 +250,6 @@ export default function TrackerScreen({ navigation }) {
           <Text style={styles.materialsBtnText}>Materials</Text>
         </TouchableOpacity>
       </View>
-
-      {!user?.premium && (
-        <View style={{ paddingHorizontal: Spacing.screenPadding, marginTop: Spacing[3] }}>
-          <PremiumUpsellBanner
-            icon="layers-outline"
-            title="Unlock Interny Premium"
-            sub="Unlimited AI chat, essay review, interview prep, and more."
-            onPress={() => navigation?.navigate('Paywall')}
-          />
-        </View>
-      )}
 
       {/* ── PIPELINE ── */}
       <>

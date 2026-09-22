@@ -1,0 +1,4 @@
+const fs=require('fs');let p='utils/onboarding.js',s=fs.readFileSync(p,'utf8').replace("locationConfirmed:user.locationConfirmed === true || (!user.school && !!user.location)","locationConfirmed:user.locationConfirmed ?? (!user.school && !!user.location && user.locationSource !== 'school')");fs.writeFileSync(p,s);
+p='utils/matching.test.mjs';s=fs.readFileSync(p,'utf8');const i=s.indexOf('console.log(`\\n${passed}');s=s.slice(0,i)+`test('Onboarding respects an explicitly unconfirmed home',()=>assert.equal(O.initialProfile({...user,locationConfirmed:false}).locationConfirmed,false));
+test('Similar recommendations respect remote requirements',()=>assert.deepEqual(M.getSimilarRecommendations([item],[{...item,id:'hybrid',location:'Hybrid',remote:true}],6,{...user,remoteOnly:true}),[]));
+`+s.slice(i);fs.writeFileSync(p,s);

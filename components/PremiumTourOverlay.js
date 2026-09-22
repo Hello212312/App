@@ -1,7 +1,7 @@
 // components/PremiumTourOverlay.js
 // Renders the spotlight tours (first-launch feature tour + premium unlock
 // tour): dimmed backdrop with a spotlight hole cut around
-// the current target (4 dim rects + accent ring — no SVG dependency), an
+// the current target (4 dim rects + accent ring, no SVG dependency), an
 // arrow-tipped caption card, and centered cards for intro/outro/fallbacks.
 // Driven entirely by context/TourContext.js; rendered inside the
 // NavigationContainer in App.js so measureInWindow coords line up 1:1.
@@ -42,7 +42,7 @@ function Dots({ count, active }) {
   );
 }
 
-// Score-breakdown rows (e.g. the match-score step) — [{ label, points, max }]
+// Score-breakdown rows (e.g. the match-score step): [{ label, points, max }]
 function StatsBlock({ stats }) {
   if (!stats || stats.length === 0) return null;
   return (
